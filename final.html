@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EarnChain PRO JS</title>
+<meta name="theme-color" content="#0D0D14">
+<meta property="og:title" content="EarnChain PRO JS - Earn $ Daily">
+<meta property="og:description" content="Join EarnChain PRO - Complete YouTube Telegram TikTok tasks &amp; earn USDT instantly! 10% lifetime bonus">
+<meta property="og:type" content="website">
+<meta property="og:image" content="banner.png">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--page:#07070c;--inp:rgba(255,255,255,.06);--sheet:#14141f;--navbg:rgba(13,13,20,.92);--bg:#0D0D14;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.09);--tx:#EDEDF5;--mu:#8C8CA3;--g1:#00FF9D;--g2:#00D1FF;--red:#FF4D6A;--yel:#FFC24D;--grad:linear-gradient(135deg,#00FF9D,#00D1FF)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body.light{--page:#E3E8F1;--bg:#F3F5FA;--card:#FFFFFF;--line:rgba(15,23,42,.11);--tx:#0F172A;--mu:#64748B;--inp:#EEF2F8;--sheet:#FFFFFF;--navbg:rgba(255,255,255,.95);--g1:#0A9F6E}
+html,body{background:var(--page);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:14px}
+#app{max-width:420px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;padding-bottom:78px;overflow-x:hidden}
+.pad{padding:16px}
+h1{font-size:22px}h2{font-size:17px;margin-bottom:10px}h3{font-size:14px}
+.mu{color:var(--mu)}.sm{font-size:12px}.g{color:var(--g1)}.r{color:var(--red)}.y{color:var(--yel)}.c{text-align:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;backdrop-filter:blur(12px)}
+.row{display:flex;align-items:center;gap:10px}.sp{justify-content:space-between}.wrap{flex-wrap:wrap}.col{display:flex;flex-direction:column;gap:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--grad);color:#0D0D14;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;flex:none}
+.logo.big{width:84px;height:84px;font-size:50px;border-radius:26px}
+input,select,textarea{width:100%;background:var(--inp);border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px;font-size:14px;outline:none;font-family:inherit}
+input:focus,select:focus,textarea:focus{border-color:var(--g1)}
+select option{background:var(--sheet);color:var(--tx)}
+label{font-size:12px;color:var(--mu);display:block;margin-bottom:4px}
+.btn{border:0;border-radius:12px;padding:13px;font-weight:700;font-size:14px;cursor:pointer;background:var(--grad);color:#0D0D14;width:100%;transition:.3s ease}
+.btn:active{transform:scale(.97)}.btn:disabled{opacity:.45;pointer-events:none}
+.btn.gh{background:var(--card);color:var(--tx);border:1px solid var(--line)}
+.btn.rd{background:var(--red);color:#fff}.btn.gn{background:#10b981;color:#fff}.btn.xs{padding:8px 12px;width:auto;font-size:12px}
+.chip{display:inline-block;padding:7px 12px;border-radius:20px;background:var(--card);border:1px solid var(--line);font-size:12px;white-space:nowrap;cursor:pointer;transition:.3s ease}
+.chip.on{background:var(--grad);color:#0D0D14;border-color:transparent;font-weight:700}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.b-p{background:rgba(255,194,77,.15);color:var(--yel)}.b-a{background:rgba(0,255,157,.15);color:var(--g1)}.b-r{background:rgba(255,77,106,.15);color:var(--red)}.b-i{background:rgba(0,209,255,.15);color:var(--g2)}
+.bal{background:linear-gradient(135deg,rgba(0,255,157,.18),rgba(0,209,255,.12));border:1px solid rgba(0,255,157,.25)}
+.bal b{font-size:32px;display:block;margin:4px 0}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:var(--navbg);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:20}
+.nav div{flex:1;text-align:center;font-size:11px;color:var(--mu);padding:4px;cursor:pointer;transition:.3s}
+.nav div.on{color:var(--g1)}.nav i{display:block;font-style:normal;font-size:19px;margin-bottom:2px}
+.bar{height:8px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden}.bar>i{display:block;height:100%;background:var(--grad);border-radius:8px;transition:width .6s ease}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:420px;max-height:88vh;overflow-y:auto;background:var(--sheet);border-radius:22px 22px 0 0;padding:18px;border-top:1px solid var(--line);animation:up .3s ease}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+#toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:99;display:flex;flex-direction:column;gap:6px;width:92%;max-width:390px;pointer-events:none}
+.tt{background:var(--sheet);border:1px solid var(--line);padding:11px 14px;border-radius:12px;font-size:13px;animation:up .3s ease}.tt.ok{border-color:var(--g1)}.tt.err{border-color:var(--red)}
+#off{display:none;background:var(--red);color:#fff;text-align:center;padding:6px;font-size:12px;position:sticky;top:0;z-index:30}
+.spin{width:18px;height:18px;border:3px solid rgba(0,0,0,.2);border-top-color:#0D0D14;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+.splash{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.splash .logo{animation:pl 1s ease-in-out infinite}@keyframes pl{50%{transform:scale(1.12);box-shadow:0 0 40px rgba(0,255,157,.5)}}
+.bars{display:flex;align-items:flex-end;gap:6px;height:90px;margin-top:8px}.bars div{flex:1;background:var(--grad);border-radius:5px 5px 0 0;min-height:3px;position:relative}
+.bars span{position:absolute;bottom:-17px;left:0;right:0;text-align:center;font-size:9px;color:var(--mu)}
+.mth{border:2px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center;cursor:pointer;transition:.3s;font-size:12px}
+.mth.on{border-color:var(--g1);background:rgba(0,255,157,.08)}.mth .logo{margin:0 auto 6px}
+.shots{display:flex;gap:8px;flex-wrap:wrap}.shots img{width:76px;height:76px;object-fit:cover;border-radius:10px;border:1px solid var(--line);cursor:pointer}
+.tick{overflow:hidden;white-space:nowrap}.tick div{display:inline-block;padding-left:100%;animation:tk 22s linear infinite}@keyframes tk{to{transform:translateX(-100%)}}
+.fab{position:fixed;bottom:84px;right:max(14px,calc(50% - 206px));width:50px;height:50px;border-radius:50%;background:var(--grad);color:#0D0D14;font-size:22px;display:flex;align-items:center;justify-content:center;z-index:25;box-shadow:0 6px 20px rgba(0,255,157,.3);cursor:pointer}
+.atabs{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;position:sticky;top:0;background:var(--bg);z-index:10;scrollbar-width:none}
+.item{border-bottom:1px solid var(--line);padding:11px 0;cursor:pointer}.item:last-child{border:0}
+.faq{cursor:pointer;padding:10px 0;border-bottom:1px solid var(--line)}.faq p{display:none;color:var(--mu);margin-top:6px;font-size:13px}.faq.open p{display:block}
+.skel{height:64px;border-radius:14px;background:linear-gradient(90deg,var(--card),rgba(255,255,255,.09),var(--card));background-size:200%;animation:sk 1.2s infinite;margin-bottom:10px}@keyframes sk{to{background-position:-200%}}
+.dots{display:flex;gap:6px;justify-content:center}.dots i{width:8px;height:8px;border-radius:8px;background:var(--line)}.dots i.on{width:22px;background:var(--g1)}
+.pw{height:5px;border-radius:5px;background:rgba(255,255,255,.08);margin-top:6px}.pw i{display:block;height:100%;border-radius:5px;transition:.3s}
+
+.lg{width:36px;height:36px;flex:none;border-radius:11px;overflow:hidden;display:block}.lg svg,.lg img{width:100%;height:100%;display:block;object-fit:cover}.lg.big{width:84px;height:84px;border-radius:26px}.lg.md{width:60px;height:60px;border-radius:18px}
+.logo.md{width:60px;height:60px;border-radius:18px;font-size:30px}
+.anav{position:sticky;top:0;background:var(--bg);z-index:10;padding:10px 12px;border-bottom:1px solid var(--line)}
+.anav .chips{padding-bottom:0}.chip.sm{padding:5px 10px;font-size:11px}
+.cnt{display:inline-block;background:var(--red);color:#fff;border-radius:10px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px}
+.live{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--g1);background:rgba(0,255,157,.1);padding:3px 9px;border-radius:20px}.live i{width:7px;height:7px;border-radius:50%;background:var(--g1);animation:lv 1.4s infinite}@keyframes lv{50%{opacity:.25}}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13px}.kv:last-child{border:0}.kv>span:first-child{color:var(--mu);flex:none}.kv b{text-align:right;word-break:break-all;font-weight:600}
+.cap{display:flex;gap:8px;align-items:center}.cap canvas{border-radius:10px;border:1px solid var(--line);flex:none}.cap input{min-width:0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;min-height:112px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:.3s ease}.tile:active{transform:scale(.97)}.tile .tn{font-size:30px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dotr{position:absolute;top:5px;right:5px;width:12px;height:12px;border-radius:50%;background:var(--red);border:2px solid var(--bg)}
+a.fab{text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="off">You are offline</div>
+<div id="toast"></div>
+<div id="app"></div>
+<script>
+"use strict";
+/* ============ HELPERS ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS={get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))}};
+const m=n=>{n=+n||0;return '$'+n.toFixed(3).replace(/0$/,'')};
+const now=()=>Date.now();
+const fd=t=>new Date(t).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+const uid=()=>Math.random().toString(36).slice(2,10)+now().toString(36).slice(-3);
+const enc=p=>'h1$'+sha256('ec27|'+p);
+function sha256(str){const b=unescape(encodeURIComponent(str)),l=b.length,K=[],H=[];let n=2,c=0;
+ while(c<64){let p=1;for(let i=2;i*i<=n;i++)if(n%i===0){p=0;break}if(p){if(c<8)H[c]=(Math.sqrt(n)%1*4294967296)>>>0;K[c++]=(Math.cbrt(n)%1*4294967296)>>>0}n++}
+ const nb=((l+9+63)>>6)<<6,w=new Uint8Array(nb);for(let i=0;i<l;i++)w[i]=b.charCodeAt(i);w[l]=128;
+ const dv=new DataView(w.buffer);dv.setUint32(nb-4,(l*8)>>>0);dv.setUint32(nb-8,Math.floor(l*8/4294967296));
+ const R=(x,a)=>(x>>>a)|(x<<(32-a));
+ for(let o=0;o<nb;o+=64){const W=new Uint32Array(64);for(let i=0;i<16;i++)W[i]=dv.getUint32(o+i*4);
+  for(let i=16;i<64;i++){const s0=R(W[i-15],7)^R(W[i-15],18)^(W[i-15]>>>3),s1=R(W[i-2],17)^R(W[i-2],19)^(W[i-2]>>>10);W[i]=(W[i-16]+s0+W[i-7]+s1)>>>0}
+  let [a,b2,c2,d,e,f,g,h]=H;
+  for(let i=0;i<64;i++){const S1=R(e,6)^R(e,11)^R(e,25),ch=(e&f)^(~e&g),t1=(h+S1+ch+K[i]+W[i])>>>0,S0=R(a,2)^R(a,13)^R(a,22),mj=(a&b2)^(a&c2)^(b2&c2),t2=(S0+mj)>>>0;h=g;g=f;f=e;e=(d+t1)>>>0;d=c2;c2=b2;b2=a;a=(t1+t2)>>>0}
+  [a,b2,c2,d,e,f,g,h].forEach((v,i)=>{H[i]=(H[i]+v)>>>0})}
+ return H.map(x=>x.toString(16).padStart(8,'0')).join('')}
+const day=t=>new Date(t||now()).toISOString().slice(0,10);
+const DAY=86400000;
+
+/* ============ DATA ============ */
+const FB=window.__FB||'https://earnchain-55ac1-default-rtdb.asia-southeast1.firebasedatabase.app';
+const COLS=['users','tasks','proofs','deposits','withdraws','notifs','tickets','kyc','logs','claims','chats','chatmsgs'];
+let DB={};COLS.forEach(k=>DB[k]=[]);
+let CFG={},LOADED=false,CONN=false,NETOK=false,ES=null,FLY=false,AGAIN=false,RT=null,PENDING=false,INC={};
+const SNAPJ={};
+const defPay={bkash:{on:true,num:'01953866541',name:'Bkash Personal'},nagad:{on:true,num:'01953866541',name:'Nagad Personal'},rocket:{on:true,num:'01953866541',name:'Rocket Personal'},binance:{on:true,num:'831571805',name:'Binance Pay ID'}};
+const CFGK=['pay','settings','admin','methods','prices','auto','share','logo','refb','email','app'];
+let FG=null;
+async function sendOtpMail(to,otp){const c=CFG.email;if(!c||!c.service||!c.template||!c.key)throw new Error('Email service is not set up yet');const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:c.service,template_id:c.template,user_id:c.key,template_params:{to_email:to,otp:otp,minutes:'1',app_name:'EARNCHAIN PRO'}})});if(!r.ok){let t='';try{t=await r.text()}catch(e){}throw new Error(t||('HTTP '+r.status))}}
+const getPay=()=>CFG.pay||defPay;
+const DEFM=()=>{const P=CFG.pay||defPay,g=k=>P[k]||defPay[k];return{v:2,dep:[
+  {id:'bkash',name:'Bkash',type:'local',num:g('bkash').num,on:g('bkash').on,color:'#e2136e'},
+  {id:'nagad',name:'Nagad',type:'local',num:g('nagad').num,on:g('nagad').on,color:'#f6921e'},
+  {id:'rocket',name:'Rocket',type:'local',num:g('rocket').num,on:g('rocket').on,color:'#8c3494'},
+  {id:'binance',name:'Binance Pay',type:'usdt',num:g('binance').num,on:g('binance').on,color:'#F0B90B',bonusOn:true,bonus:5},
+  {id:'bep20',name:'USDT BEP-20',type:'usdt',num:'',on:false,color:'#26A17B',bonusOn:false,bonus:0},
+  {id:'trc20',name:'USDT TRC-20',type:'usdt',num:'',on:false,color:'#EF0027',bonusOn:false,bonus:0}],
+ wd:[{id:'bkash',name:'Bkash',type:'local',on:true},{id:'nagad',name:'Nagad',type:'local',on:true},{id:'rocket',name:'Rocket',type:'local',on:true},{id:'binance',name:'Binance Pay',type:'usdt',on:true},{id:'bep20',name:'USDT BEP-20',type:'usdt',on:true},{id:'trc20',name:'USDT TRC-20',type:'usdt',on:true}]}};
+const getM=()=>CFG.methods?{dep:CFG.methods.dep||[],wd:CFG.methods.wd||[]}:DEFM();
+const getAuto=()=>Object.assign({def:'Admin will reply soon.',rules:[]},CFG.auto||{});
+const getShare=()=>Object.assign({caption:'Join '+APPN()+' - complete YouTube, Telegram and TikTok tasks and earn USDT instantly! You also earn a lifetime commission when your friends join.\nRegister here: {link}'},CFG.share||{});
+const getRefB=()=>Object.assign({on:true,tasks:10,amt:.05,caption:'Your friend completes {n} tasks and you get a ${amt} bonus!'},CFG.refb||{});
+const getSet=()=>Object.assign({maint:false,kycReq:false,depRate:130,wdRate:123,depFee:2,wdFee:7,taskFee:3,shotFee:.01,minBudget:.85,refPct:10},CFG.settings||{});
+const getAdm=()=>CFG.admin||{id:'01953866541',pass:enc('0195386')};
+const save=()=>{flush()};
+
+/* ---- cloud sync (Firebase Realtime Database over REST + live stream) ---- */
+function setDeep(o,parts,v){for(let i=0;i<parts.length-1;i++){if(typeof o[parts[i]]!=='object'||o[parts[i]]===null)o[parts[i]]={};o=o[parts[i]]}const l=parts[parts.length-1];if(v===null||v===undefined)delete o[l];else o[l]=v}
+function setColl(c,obj){Object.keys(SNAPJ).forEach(k=>{if(k.startsWith(c+'/'))delete SNAPJ[k]});const a=[];
+  if(obj&&typeof obj==='object')Object.keys(obj).forEach(id=>{const r=obj[id];if(r&&typeof r==='object'){r.id=id;a.push(r);SNAPJ[c+'/'+id]=JSON.stringify(r)}});
+  a.sort((x,y)=>(x.created||x.t||0)-(y.created||y.t||0));DB[c]=a}
+function cfgSnap(k){if(CFG[k]!==undefined)SNAPJ['config/'+k]=JSON.stringify(CFG[k]);else delete SNAPJ['config/'+k]}
+function applyEv(path,data,patch){
+  const P=path.split('/').filter(Boolean);
+  if(patch&&data&&typeof data==='object'){Object.keys(data).forEach(k=>applyEv('/'+P.concat(k.split('/')).join('/'),data[k],false));return}
+  if(!P.length){COLS.forEach(c=>setColl(c,data&&data[c]));CFG=(data&&data.config)||{};CFGK.forEach(cfgSnap);return}
+  if(P[0]==='config'){if(P.length===1)CFG=data||{};else setDeep(CFG,P.slice(1),data);if(P[1])cfgSnap(P[1]);else CFGK.forEach(cfgSnap);return}
+  const c=P[0];if(!COLS.includes(c))return;
+  if(P.length===1)return setColl(c,data);
+  const id=P[1],k=c+'/'+id;let i=DB[c].findIndex(r=>r.id===id);
+  if(P.length===2){if(data===null||data===undefined){if(i>=0)DB[c].splice(i,1);delete SNAPJ[k]}else{data.id=id;if(i>=0)DB[c][i]=data;else DB[c].push(data);SNAPJ[k]=JSON.stringify(data)}return}
+  if(i<0){if(data===null||data===undefined)return;DB[c].push({id});i=DB[c].length-1;SNAPJ[k]=JSON.stringify({id})}
+  setDeep(DB[c][i],P.slice(2),data);const o=SNAPJ[k]?JSON.parse(SNAPJ[k]):{id};setDeep(o,P.slice(2),data);SNAPJ[k]=JSON.stringify(o)}
+function inc(u,f,a){u[f]=+((+u[f]||0)+a).toFixed(6);const k='users/'+u.id,sj=SNAPJ[k];if(sj===undefined)return;const o=JSON.parse(sj);o[f]=u[f];SNAPJ[k]=JSON.stringify(o);const p=k+'/'+f;INC[p]=(INC[p]||0)+a}
+const bal=(u,a)=>inc(u,'balance',a);
+async function flush(){
+  if(!LOADED)return;if(FLY){AGAIN=true;return}
+  const patch={},sent=[];
+  COLS.forEach(c=>{const seen={};DB[c].forEach(r=>{if(!r||!r.id)return;const k=c+'/'+r.id;seen[k]=1;const j=JSON.stringify(r),old=SNAPJ[k];if(old===j)return;
+      if(old===undefined)patch[k]=r;else{const o=JSON.parse(old);Object.keys(Object.assign({},o,r)).forEach(f=>{if(JSON.stringify(o[f])!==JSON.stringify(r[f]))patch[k+'/'+f]=r[f]===undefined?null:r[f]})}sent.push([k,j])});
+    Object.keys(SNAPJ).forEach(k=>{if(k.startsWith(c+'/')&&!seen[k]){patch[k]=null;sent.push([k,null])}})});
+  CFGK.forEach(k=>{const key='config/'+k;if(CFG[k]===undefined){if(SNAPJ[key]!==undefined){patch[key]=null;sent.push([key,null])}}else{const j=JSON.stringify(CFG[k]);if(SNAPJ[key]!==j){patch[key]=CFG[k];sent.push([key,j])}}});
+  const inc0=INC;INC={};Object.keys(inc0).forEach(p=>{if(patch[p]===undefined&&!patch[p.split('/').slice(0,2).join('/')])patch[p]={'.sv':{increment:inc0[p]}}});
+  if(!Object.keys(patch).length)return;
+  FLY=true;
+  try{const r=await fetch(FB+'/.json',{method:'PATCH',body:JSON.stringify(patch)});if(!r.ok)throw new Error('HTTP '+r.status);
+    sent.forEach(([k,j])=>{if(j===null)delete SNAPJ[k];else SNAPJ[k]=j})}
+  catch(e){Object.keys(inc0).forEach(p=>{INC[p]=(INC[p]||0)+inc0[p]});if(now()-(window._lt||0)>20000){window._lt=now();toast('Sync failed ('+e.message+'). Retrying...','err')}setTimeout(flush,4000)}
+  FLY=false;if(AGAIN){AGAIN=false;flush()}}
+function onEv(e,patch){let d;try{d=JSON.parse(e.data)}catch(x){return}applyEv(d.path||'/',d.data,patch);if(!LOADED){LOADED=true;onLoaded()}softRender()}
+function onLoaded(){document.title=APPN();DB.users.forEach(u=>{if(!u.refBy&&u.refCode){const r=uEc(u.refCode);if(r&&r.id!==u.id&&r.fp!==u.fp)u.refBy=r.id}});expireTasks();save()}
+function banner(){const b=$('#off');if(!b)return;if(!navigator.onLine){b.textContent='You are offline';b.style.display='block'}else if(!NETOK){b.textContent='Connecting to server...';b.style.display='block'}else b.style.display='none'}
+function connect(){try{if(ES)ES.close();ES=new EventSource(FB+'/.json');ES.addEventListener('put',e=>onEv(e,false));ES.addEventListener('patch',e=>onEv(e,true));ES.addEventListener('cancel',()=>toast('Server refused access. Check the Firebase Rules.','err'));ES.onopen=()=>{NETOK=true;banner()};ES.onerror=()=>{NETOK=false;banner()}}catch(e){}}
+function softRender(){clearTimeout(RT);RT=setTimeout(()=>{liveChat();document.title=APPN();if(!CONN){const a=document.activeElement;if((a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))||$('#sh')||(!S.admin&&['create','deposit','withdraw','auth','support','chat'].includes(S.view))){PENDING=true;return}}PENDING=false;render()},200)}
+const UX=LS.get('ec_ux',{sound:true,haptic:true});
+const fp=(()=>{let f=LS.get('ec_fp');if(!f){f=uid()+uid();LS.set('ec_fp',f)}return f})();
+
+
+const uBy=id=>DB.users.find(x=>x.id===id);
+const uEc=ec=>DB.users.find(x=>x.ec.toLowerCase()===String(ec).toLowerCase());
+const tBy=id=>DB.tasks.find(x=>x.id===id);
+function notify(to,text,type){DB.notifs.unshift({id:uid(),to,text,type:type||'info',t:now(),read:false})}
+function addLog(u,type,amt,desc){DB.logs.push({id:uid(),uid:u.id,t:now(),type,amt,desc})}
+const myLogs=u=>DB.logs.filter(l=>l.uid===u.id).sort((a,b)=>b.t-a.t);
+function newEc(){let x;do{x='EC-'+(1000+Math.floor(Math.random()*9000))}while(uEc(x));return x}
+
+/* ============ CONSTANTS ============ */
+const DEFCATS={YouTube:{Watch:.015,Like:.015,Subscribe:.015,Comment:.015},Telegram:{'Channel Join':.015,'Group Join':.015,'Bot Start':.015,'Bot Refer':.025,Refer:.025},TikTok:{'Like + Comment + Follow':.03},Facebook:{Follow:.015,'Watch 2 min':.015},'X Twitter':{Follow:.015,'Follow+Like+Comment+Repost':.03},KYC:{Verification:.35},Airdrop:{Airdrop:.05}};
+const getCats=()=>CFG.prices&&Object.keys(CFG.prices).length?CFG.prices:DEFCATS;
+const LOGO_SVG='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00FF9D"/><stop offset="1" stop-color="#00D1FF"/></linearGradient></defs><rect width="100" height="100" rx="26" fill="url(#lgg)"/><g fill="#0D0D14"><rect x="26" y="21" width="15" height="58" rx="7"/><rect x="26" y="21" width="49" height="15" rx="7.5"/><rect x="26" y="42.5" width="38" height="15" rx="7.5"/><rect x="26" y="64" width="49" height="15" rx="7.5"/></g><circle cx="77" cy="26" r="5" fill="#fff" opacity=".9"/></svg>';
+const LG=(sz,st)=>'<div class="lg '+(sz||'')+'"'+(st?' style="'+st+'"':'')+'>'+(CFG.logo?'<img src="'+esc(CFG.logo)+'" alt="">':LOGO_SVG)+'</div>';
+const AV=(u,sz)=>u&&u.avatar?'<div class="lg '+(sz||'')+'"><img src="'+esc(u.avatar)+'" alt=""></div>':'<div class="logo '+(sz==='md'?'md':'')+'">'+esc(((u&&u.name)||'?')[0].toUpperCase())+'</div>';
+const refLink=()=>location.href.split('#')[0].split('?')[0].replace(/[^\/]*$/,'final.html')+'?ref='+S.user.ec;
+const shareText=()=>{const sh=getShare(),l=refLink();let t=String(sh.caption).replace(/\{link\}/g,l).replace(/\{code\}/g,S.user.ec);if(!String(sh.caption).includes('{link}'))t+='\n'+l;return t};
+function autoMatch(text){const q=String(text).toLowerCase(),a=getAuto();for(const r of(a.rules||[])){const kws=String(r.kw||'').split(/[,\n]/).map(s=>s.trim().toLowerCase()).filter(Boolean);if(kws.some(k=>q.includes(k)))return r.reply}return null}
+const monthName=o=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth()-o,1).toLocaleString('en',{month:'short',year:'numeric'})};
+function rng(p){const d=new Date();if(p==='today'){const s=new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime();return[s,s+DAY]}return[new Date(d.getFullYear(),d.getMonth()-p,1).getTime(),new Date(d.getFullYear(),d.getMonth()-p+1,1).getTime()]}
+function stats(a,b){const inr=t=>t>=a&&t<b,sum=(arr,f)=>arr.reduce((s,x)=>s+f(x),0);
+  const dep=DB.deposits.filter(x=>x.status==='approved'&&inr(x.at||x.t)),wd=DB.withdraws.filter(x=>x.status==='approved'&&inr(x.at||x.t)),tk=DB.tasks.filter(x=>inr(x.created)),
+  rf=DB.logs.filter(l=>l.type==='ref'&&inr(l.t)),rb=DB.logs.filter(l=>l.type==='refb'&&inr(l.t)),ky=DB.kyc.filter(k=>k.status==='approved'&&inr(k.at||k.t)),us=DB.users.filter(u=>inr(u.created)),pr=DB.proofs.filter(p=>p.status==='approved'&&inr(p.decidedAt||p.t));
+  const dF=sum(dep,x=>x.fee!==undefined?x.fee:x.amt*.02),wF=sum(wd,x=>x.fee!==undefined?x.fee:x.amt*.07),tF=sum(tk,x=>x.fee||0);
+  return{dep:sum(dep,x=>x.amt),depN:dep.length,wd:sum(wd,x=>x.amt),wdN:wd.length,tk:sum(tk,x=>x.paid||x.total||0),tkN:tk.length,ref:sum(rf,x=>x.amt),refb:sum(rb,x=>x.amt),kycN:ky.length,usN:us.length,paid:sum(pr,x=>(tBy(x.taskId)||{}).price||0),prN:pr.length,fee:dF+wF+tF,dF,wF,tF}}
+let CAP='';
+function drawCap(){document.querySelectorAll('canvas.capc').forEach(c=>{const x=c.getContext('2d');x.fillStyle='#1b1b29';x.fillRect(0,0,c.width,c.height);for(let i=0;i<8;i++){x.strokeStyle='rgba(0,255,157,'+(.15+Math.random()*.35)+')';x.beginPath();x.moveTo(Math.random()*c.width,Math.random()*c.height);x.lineTo(Math.random()*c.width,Math.random()*c.height);x.stroke()}for(let i=0;i<CAP.length;i++){x.save();x.translate(12+i*25,27+Math.random()*6);x.rotate((Math.random()-.5)*.55);x.font='bold '+(22+(Math.random()*6|0))+'px sans-serif';x.fillStyle='hsl('+(Math.random()*360|0)+',80%,72%)';x.fillText(CAP[i],0,0);x.restore()}})}
+function newCap(){CAP=String(1000+Math.floor(Math.random()*9000));drawCap();const i=$('#cpi');if(i)i.value=''}
+const capHTML=show=>'<div id="capbox" style="display:'+(show?'block':'none')+'"><label>Captcha: enter the 4 digits</label><div class="cap"><canvas class="capc" width="120" height="40"></canvas><button class="btn gh xs" type="button" onclick="newCap()">&#8635;</button><input id="cpi" inputmode="numeric" maxlength="4" placeholder="0000" autocomplete="off"></div></div>';
+function sq(file,size,fmt){return new Promise(res=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=size;const x=c.getContext('2d'),s=Math.min(im.width,im.height);x.drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,size,size);res(c.toDataURL(fmt==='png'?'image/png':'image/jpeg',.85))};im.src=r.result};r.readAsDataURL(file)})}
+async function claimSlot(t,u){
+  const put=(key,rec,cond)=>fetch(FB+'/claims/'+key+'.json',{method:'PUT',headers:cond?{'if-match':'null_etag'}:{},body:JSON.stringify(rec)});
+  let atomic=true;
+  for(let i=0;i<8;i++){
+    const used=new Set(DB.claims.filter(c=>c.taskId===t.id).map(c=>c.slot)),free=[];for(let k=0;k<t.max;k++)if(!used.has(k))free.push(k);
+    if(!free.length)return null;
+    const slot=free[Math.floor(Math.random()*free.length)],key=t.id+'_'+slot,rec={id:key,taskId:t.id,uid:u.id,slot,t:now()};
+    try{const r=await put(key,rec,atomic);
+      if(r.ok){if(!DB.claims.some(c=>c.id===key))DB.claims.push(rec);SNAPJ['claims/'+key]=JSON.stringify(rec);return slot}
+      if(r.status===412){if(!DB.claims.some(c=>c.id===key)){const o={id:key,taskId:t.id,uid:'?',slot,t:now()};DB.claims.push(o);SNAPJ['claims/'+key]=JSON.stringify(o)}continue}
+      throw new Error('HTTP '+r.status)}
+    catch(e){if(e instanceof TypeError&&atomic){atomic=false;i--;continue}throw e}}
+  return null}
+function releaseSlot(p){if(p.slot===undefined)return;const i=DB.claims.findIndex(c=>c.id===p.taskId+'_'+p.slot);if(i>=0)DB.claims.splice(i,1)}
+function cleanup(){if(LS.get('ec_clean')===day())return;LS.set('ec_clean',day());const lim=now()-100*DAY;
+  DB.logs=DB.logs.filter(l=>l.t>=lim);DB.notifs=DB.notifs.filter(n=>n.t>=lim);
+  DB.deposits.forEach(d=>{if(d.status!=='pending'&&d.shot&&d.t<lim)delete d.shot});
+  DB.proofs.forEach(p=>{if(!['pending','appealed'].includes(p.status)&&p.shots&&p.shots.length&&p.t<lim)p.shots=[]});
+  DB.kyc.forEach(k=>{if(k.status!=='pending'&&k.shots&&k.shots.length&&k.t<lim)k.shots=[]});const l3=now()-3*DAY;DB.chatmsgs=DB.chatmsgs.filter(x=>x.t>=l3);DB.chats=DB.chats.filter(c=>c.status==='open'||(c.closedAt||0)>=l3);save()}
+function setSet(o){CFG.settings=Object.assign({},CFG.settings||{},o);save()}
+const getApp=()=>Object.assign({name:'EarnChain PRO JS',tagline:'Small Gigs. Big Results.',foot:'We are waiting for you! Start your earning journey today.',annOn:false,ann:'',tg:'',tw:'',tickOn:true,tick:'',contest:'',regOpen:true,minDep:1,minWd:1,wdDay:3},CFG.app||{});
+const APPN=()=>getApp().name||'EarnChain PRO JS';
+const CHAT_IDLE=300000;
+const chatOf=u=>DB.chats.find(c=>c.id===u.id);
+const chatMsgs=c=>DB.chatmsgs.filter(x=>x.uid===c.uid&&x.n===c.n).sort((a,b)=>a.t-b.t);
+const chatActive=c=>!!c&&c.status==='open'&&(c.lastUserMsg||0)>0&&now()-Math.max(c.lastUserMsg||0,c.lastSeen||0)<CHAT_IDLE;
+const chatUnread=u=>{const c=u&&chatOf(u);return !!c&&c.status==='open'&&(c.lastAT||0)>(c.uSeen||0)};
+const ago=t=>{const s=Math.max(0,Math.floor((now()-(t||0))/1000));return s<60?'just now':Math.floor(s/60)+' min ago'};
+const bubble=(right,text,label)=>'<div style="text-align:'+(right?'right':'left')+';margin:6px 0">'+(label?'<div class="mu" style="font-size:10px;margin-bottom:2px">'+esc(label)+'</div>':'')+'<span class="badge '+(right?'b-a':'b-i')+'" style="font-weight:400;padding:8px 12px;white-space:pre-wrap;text-align:left;display:inline-block;max-width:85%;word-break:break-word">'+esc(text)+'</span></div>';
+function pubStats(){const ap=DB.proofs.filter(p=>p.status==='approved');return{u:DB.users.length,j:ap.length,p:ap.reduce((q,p)=>q+((tBy(p.taskId)||{}).price||0),0)}}
+const fmtN=n=>Number(n).toLocaleString('en-US');
+function landing(){const ap=getApp(),st=pubStats(),ss=getSet(),fn=n=>'@'+String(n||'User').split(' ')[0];
+  let tk=String(ap.tick||'').split('\n').map(x=>x.trim()).filter(Boolean);
+  if(!tk.length){const e=DB.proofs.filter(p=>p.status==='approved').sort((a,b)=>(b.decidedAt||0)-(a.decidedAt||0)).slice(0,4).map(p=>{const w=uBy(p.workerId),t=tBy(p.taskId);return w&&t?fn(w.name)+' just earned '+m(t.price):''}).filter(Boolean);
+    const w=DB.withdraws.filter(x=>x.status==='approved').sort((a,b)=>(b.at||0)-(a.at||0)).slice(0,3).map(x=>fn(x.name)+' withdrew '+m(x.amt));tk=e.concat(w)}
+  if(!tk.length)tk=['Join now and start earning with simple tasks'];
+  const txt=tk.join('   \u2022   '),dur=Math.max(14,Math.round(txt.length*.22));
+  const wd=getM().wd.filter(x=>x.on).map(x=>x.name),rb=getRefB();
+  const why=[['&#128179;','Get paid your way',wd.length?'Withdraw your earnings to '+wd.join(', ')+'.':'Withdraw your earnings when you reach the minimum.'],['&#128274;','Tasks are checked','Task owners review every proof, and our team settles any dispute.'],['&#129309;','Lifetime referral commission','Earn '+ss.refPct+'% of every task your friends earn, for life.'+(rb.on?' Plus a bonus when they finish '+rb.tasks+' tasks.':'')],['&#128640;','Grow with your own tasks','Post tasks, set your price and let workers grow your channel.']];
+  const steps=[['1','Register','Create your free account in a minute.'],['2','Do tasks','Pick a task, finish it and send your proof.'],['3','Get paid','Earn, level up and withdraw.']];
+  return '<div class="card tick livebar" style="margin-top:18px;padding:10px 0"><div class="sm" style="animation-duration:'+dur+'s"><span class="r">&#9679;</span> <b>LIVE</b>&nbsp;&nbsp;'+esc(txt)+'</div></div>'
+  +'<div class="grid3" style="margin-bottom:12px"><div class="card c" style="margin:0;padding:12px 6px"><b class="g" style="font-size:20px">'+fmtN(st.u)+'</b><div class="mu" style="font-size:11px">Members</div></div><div class="card c" style="margin:0;padding:12px 6px"><b class="g" style="font-size:20px">'+fmtN(st.j)+'</b><div class="mu" style="font-size:11px">Jobs completed</div></div><div class="card c" style="margin:0;padding:12px 6px"><b class="g" style="font-size:20px">'+m(st.p).replace(/\.?0+$/,'')+'</b><div class="mu" style="font-size:11px">Paid to workers</div></div></div>'
+  +'<h2 class="c" style="margin:18px 0 10px">Why '+esc(APPN())+'?</h2>'+why.map(x=>'<div class="card row" style="align-items:flex-start"><div style="font-size:26px;line-height:1">'+x[0]+'</div><div><b>'+x[1]+'</b><div class="mu sm" style="margin-top:2px">'+x[2]+'</div></div></div>').join('')
+  +'<h2 class="c" style="margin:18px 0 10px">How it works</h2><div class="card">'+steps.map(x=>'<div class="row" style="padding:8px 0"><div class="lg" style="width:32px;height:32px;border-radius:50%;background:var(--grad);color:#0D0D14;font-weight:800;display:flex;align-items:center;justify-content:center">'+x[0]+'</div><div><b>'+x[1]+'</b><div class="mu sm">'+x[2]+'</div></div></div>').join('')+'</div>'
+  +'<div class="card c" style="border-color:var(--g1)"><b>'+esc(ap.foot||'')+'</b><div style="margin-top:10px"><button class="btn" onclick="go(\'auth\',\'reg\');window.scrollTo(0,0)">Join now</button></div></div>'
+  +'<p class="mu c" style="font-size:11px;margin:14px 0 6px"><a class="g" href="terms.html" target="_blank">Terms</a> &bull; <a class="g" href="privacy.html" target="_blank">Privacy</a> &bull; support@earnchain.pro</p>'}
+function userChatHTML(){const u=S.user,c=u&&chatOf(u);if(!c)return '<p class="mu c">Say hello. Support will reply here.</p>';const ms=chatMsgs(c);
+  return (ms.length?ms.map(x=>bubble(x.from==='u',x.text,x.from==='a'?'Support':(x.from==='s'&&!x.sys?'Auto reply':''))).join(''):'<p class="mu c">Say hello. Support will reply here.</p>')+(c.status==='closed'?'<p class="mu sm c" style="margin-top:10px">This chat is closed.</p>':'')}
+function threadHTML(uid){const c=DB.chats.find(x=>x.uid===uid);if(!c)return '';const ms=chatMsgs(c);return (ms.length?ms.map(x=>bubble(x.from==='a',x.text,x.from==='u'?'':(x.from==='a'?'You':(x.sys?'System':'Auto reply')))).join(''):'<p class="mu c">No messages</p>')+(c.status==='closed'?'<p class="mu sm c" style="margin-top:10px">This chat is closed.</p>':'')}
+function threadView(uid){const c=DB.chats.find(x=>x.uid===uid);if(!c)return '<button class="btn gh xs" onclick="A.chatBack()">&#8592; Inbox</button>'+empty('Chat not found');
+  return '<div class="row sp" style="margin-bottom:10px"><button class="btn gh xs" onclick="A.chatBack()">&#8592; Inbox</button><div class="row">'+AV(uBy(uid)||{name:c.name},'')+'<div><b>'+esc(c.name)+'</b><div class="mu sm">'+esc(c.ec)+'</div></div></div></div><div class="card" id="cthread" style="min-height:240px;max-height:55vh;overflow-y:auto">'+threadHTML(uid)+'</div>'+(c.status==='closed'?'<p class="mu sm c">This chat is closed.</p>':'<div class="row"><input id="am" placeholder="Reply..." onkeydown="if(event.key===\'Enter\')A.achat()"><button class="btn xs" onclick="A.achat()">Send</button></div>')}
+function chatEnsure(u){let c=chatOf(u);if(!c){c={id:u.id,uid:u.id,ec:u.ec,name:u.name,n:1,status:'open',started:now(),lastMsg:0,lastUserMsg:0,lastSeen:now(),lastAT:0,uSeen:now(),needs:false,wait:0,lastText:''};DB.chats.push(c);save()}return c}
+function closeIdleChats(only){let ch=false;DB.chats.forEach(c=>{if(only&&c.uid!==only)return;if(c.status==='open'&&(c.lastUserMsg||0)>0&&now()-Math.max(c.lastUserMsg||0,c.lastSeen||0)>=CHAT_IDLE){c.status='closed';c.closedAt=now();c.needs=false;c.wait=0;c.lastAT=now();const id='sys_'+c.id+'_'+c.n;if(!DB.chatmsgs.some(x=>x.id===id))DB.chatmsgs.push({id,uid:c.uid,n:c.n,from:'s',sys:true,text:'You did not respond for a long time, so this chat has been closed.',t:now()});ch=true}});if(ch)save()}
+function liveChat(){const t=$('#cthread');if(t&&S.admin&&S.chatUid){t.innerHTML=threadHTML(S.chatUid);t.scrollTop=t.scrollHeight}const b=$('#cbox');if(b&&!S.admin&&S.view==='chat'){b.innerHTML=userChatHTML();b.scrollTop=b.scrollHeight;const cc=$('#cctl'),c=chatOf(S.user),st=c&&c.status==='closed'?'closed':'open';if(cc&&cc.dataset.st!==st){cc.dataset.st=st;cc.innerHTML=userChatCtl(st)}}}
+function userChatCtl(st){return st==='closed'?'<button class="btn" onclick="A.chatNew()">Start a new chat</button>':'<div class="row"><input id="cm" placeholder="Type a message" onkeydown="if(event.key===\'Enter\')A.chat()"><button class="btn xs" onclick="A.chat()">Send</button></div><p class="mu sm c" style="margin-top:8px">If you stay away for 5 minutes, this chat will be closed.</p>'}
+const TGSVG='<svg width="24" height="24" viewBox="0 0 24 24" fill="#0D0D14"><path d="M21.6 3.4 2.6 10.8c-.9.4-.9 1.1-.2 1.3l4.9 1.5 1.9 5.8c.2.6.5.7 1 .4l2.7-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-15.3c.3-1.2-.4-1.8-1.3-1.4zM8.6 13.2l9.1-5.7c.4-.3.8-.1.5.2l-7.5 6.8-.3 3.1z"/></svg>';
+const XSVG='<svg width="22" height="22" viewBox="0 0 24 24" fill="#0D0D14"><path d="M18.2 2h3.3l-7.2 8.3L22.8 22h-6.6l-5.2-6.8L5 22H1.7l7.7-8.8L1.3 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.1 3.9H5.1L17 20z"/></svg>';
+function fabs(){const ap=getApp(),it=[['onclick="go(\'chat\')"','&#9993;'+(chatUnread(S.user)?'<i class="dotr"></i>':''),'div']];
+  if(/^https?:\/\//i.test(ap.tg||''))it.push(['href="'+esc(ap.tg)+'" target="_blank" rel="noopener"',TGSVG,'a']);
+  if(/^https?:\/\//i.test(ap.tw||''))it.push(['href="'+esc(ap.tw)+'" target="_blank" rel="noopener"',XSVG,'a']);
+  return it.map((x,i)=>'<'+x[2]+' class="fab" style="bottom:'+(84+i*62)+'px" '+x[0]+'>'+x[1]+'</'+x[2]+'>').join('')}
+const LV=[0,10,25,50,100,200,350,550,800,1100];
+const FAQ=[['How do I earn?','Open Tasks, finish a task, upload the proof screenshot and get paid after approval.'],['How long does approval take?','Task owners review proofs. Most are reviewed within 24 hours.'],['What is the minimum deposit?','The minimum deposit is $1.'],['Can I withdraw my deposit?','No. Deposited money can only be used to create tasks. You can withdraw only the money you earn from tasks and referrals.'],['What is the minimum withdrawal?','The minimum withdrawal is $1. You can withdraw up to 3 times per day.'],['How does the referral program work?','You earn a lifetime commission on every task your friend earns, plus a bonus when your friend completes enough tasks.'],['My proof was rejected. What now?','Open My Work and tap Appeal. Admin reviews it and the decision is final.'],['Can I do one task twice?','No. One task can be done once per user.'],['What is KYC?','Verify your identity once and unlock verified-only tasks and a bonus.'],['How do tasks expire?','Unused task budget is refunded to the owner after the task expires.'],['How do I contact support?','Use Live Chat or send a ticket from Profile > Support.']];
+const lvOf=n=>{let l=1;LV.forEach((x,i)=>{if(n>=x)l=i+1});return l};
+
+/* ============ STATE ============ */
+const S={view:'splash',p:null,user:null,admin:false,tab:'dash',q:'',page:1,f:{cat:'All',sort:'new',only:true,ver:false,max:10},shots:[],step:1,method:null,amt:'',sess:LS.get('ec_sess',null),tf:'pending',hf:{type:'All',st:'All',from:'',to:''}};
+let LISTFN=null,lastAct=now(),openedAt={};
+const URLREF=new URLSearchParams(location.search).get('ref');
+if(URLREF)LS.set('ec_ref',URLREF.toUpperCase());
+
+/* ============ UI UTILS ============ */
+function toast(t,k){const e=document.createElement('div');e.className='tt '+(k||'');e.textContent=t;$('#toast').appendChild(e);if(k==='ok')beep();setTimeout(()=>e.remove(),2800)}
+function beep(){if(!UX.sound)return;try{const a=new(window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=720;g.gain.value=.05;o.start();o.stop(a.currentTime+.08)}catch(e){}}
+function hap(){if(UX.haptic&&navigator.vibrate)navigator.vibrate(12)}
+function sheet(h){closeSheet();const o=document.createElement('div');o.className='ov';o.id='sh';o.innerHTML='<div class="sheet">'+h+'</div>';o.addEventListener('click',e=>{if(e.target===o)closeSheet()});document.body.appendChild(o)}
+function closeSheet(){const o=$('#sh');if(o)o.remove();if(PENDING)softRender()}
+function confirmBox(msg,cb){window._cb=cb;sheet('<h2>Confirm</h2><p class="mu" style="margin-bottom:14px">'+esc(msg)+'</p><div class="grid2"><button class="btn gh" onclick="closeSheet()">Cancel</button><button class="btn" onclick="closeSheet();window._cb()">Yes, continue</button></div>')}
+function img(src){sheet('<img src="'+src+'" style="width:100%;border-radius:12px"><button class="btn gh" style="margin-top:10px" onclick="closeSheet()">Close</button>')}
+function pager(total,per,fn){const n=Math.max(1,Math.ceil(total/per));if(n<2)return '';let h='<div class="row c wrap" style="justify-content:center;margin-top:10px">';for(let i=1;i<=n&&i<=12;i++)h+='<span class="chip '+(i===S.page?'on':'')+'" onclick="A.pg('+i+')">'+i+'</span>';return h+'</div>'}
+function empty(t,cta,fn){return '<div class="c mu" style="padding:28px 10px"><div style="font-size:34px">&#9711;</div><p style="margin:8px 0">'+esc(t)+'</p>'+(cta?'<button class="btn xs" onclick="'+fn+'">'+esc(cta)+'</button>':'')+'</div>'}
+function bars(vals,labels){const mx=Math.max(...vals,.0001);return '<div class="bars" style="margin-bottom:20px">'+vals.map((v,i)=>'<div style="height:'+Math.max(3,v/mx*100)+'%"><span>'+esc(labels[i])+'</span></div>').join('')+'</div>'}
+function last7(){const a=[];for(let i=6;i>=0;i--)a.push(day(now()-i*DAY));return a}
+function strength(p){let s=0;if(p.length>=6)s++;if(p.length>=10)s++;if(/[A-Z]/.test(p)&&/[a-z]/.test(p))s++;if(/\d/.test(p)&&/[^A-Za-z0-9]/.test(p))s++;return s}
+function compress(file,wm){return new Promise(res=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const sc=Math.min(1,600/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*sc;c.height=im.height*sc;const x=c.getContext('2d');x.drawImage(im,0,0,c.width,c.height);x.font='bold 14px sans-serif';x.fillStyle='rgba(255,255,255,.6)';x.fillText(wm,8,c.height-8);let q=.7,d=c.toDataURL('image/jpeg',q);while(d.length>160000&&q>.25){q-=.1;d=c.toDataURL('image/jpeg',q)}res(d)};im.src=r.result};r.readAsDataURL(file)})}
+function fakeShot(t){const c=document.createElement('canvas');c.width=300;c.height=300;const x=c.getContext('2d');x.fillStyle='#1b2a3a';x.fillRect(0,0,300,300);x.fillStyle='#00D1FF';x.font='bold 22px sans-serif';x.fillText(t,20,150);return c.toDataURL('image/jpeg',.6)}
+
+/* ============ BUSINESS LOGIC ============ */
+function lvlRewards(u){const l=lvOf(u.tasksDone||0);u.lvPaid=u.lvPaid||{};[[5,1],[10,5]].forEach(([L,a])=>{if(l>=L&&!u.lvPaid[L]){u.lvPaid[L]=1;bal(u,a);addLog(u,'bonus',a,'Level '+L+' reward');notify(u.id,'Level '+L+' reward '+m(a)+' added','reward')}})}
+function payProof(p,by){
+  if(p.paid)return false;const t=tBy(p.taskId),w=uBy(p.workerId);if(!t||!w)return false;
+  p.paid=true;p.status='approved';p.decidedBy=by;p.decidedAt=now();
+  bal(w,t.price);inc(w,'earned',t.price);inc(w,'tasksDone',1);addLog(w,'task',t.price,'Task approved: '+t.title);
+  notify(w.id,'Task Proof Approved '+m(t.price),'task');
+  const st=getSet();
+  if(w.refBy){const r=uBy(w.refBy);if(r){const c=t.price*st.refPct/100;bal(r,c);inc(r,'refEarned',c);inc(r,'earned',c);addLog(r,'ref',c,'Referral earn from '+w.ec);notify(r.id,'Referral Earn '+m(c)+' ('+st.refPct+'%)','ref');
+      const rb=getRefB();if(rb.on&&!w.refBonusPaid&&(w.tasksDone||0)>=rb.tasks){w.refBonusPaid=true;bal(r,rb.amt);inc(r,'refEarned',rb.amt);inc(r,'earned',rb.amt);addLog(r,'refb',rb.amt,'Referral bonus: '+w.ec+' finished '+rb.tasks+' tasks');notify(r.id,'Referral bonus '+m(rb.amt)+': '+w.name+' completed '+rb.tasks+' tasks','ref')}}}
+  lvlRewards(w);return true}
+function filled(t){return DB.proofs.filter(p=>p.taskId===t.id&&['pending','approved','appealed'].includes(p.status)).length}
+function unitCost(t){return t.perSlot!==undefined?t.perSlot:t.total/t.max}
+function expireTasks(){if(!LOADED)return;let ch=false;DB.tasks.forEach(t=>{if(t.status==='active'&&now()>t.expires&&(S.admin||(S.user&&t.owner===S.user.id))){t.status='expired';const left=t.max-filled(t);if(left>0){const o=uBy(t.owner);if(o){const a=left*unitCost(t),f0=t.fromDep;let rd=a,re=0;if(f0!==undefined){const tt=(f0+(t.fromEarn||0))||1;rd=a*(f0/tt);re=a-rd}if(rd>0)inc(o,'dep',rd);if(re>0)bal(o,re);t.fee=Math.max(0,(t.fee||0)-left*(unitCost(t)-t.price));addLog(o,'refund',a,'Unused budget refund: '+t.title);notify(o.id,'Task expired. Refund '+m(a)+' added','refund')}}ch=true}});if(ch)save()}
+function curUser(){return S.user=S.sess&&S.sess.t==='u'?uBy(S.sess.id):null}
+function unread(){const to=S.admin?'admin':(S.user&&S.user.id);return DB.notifs.filter(n=>n.to===to&&!n.read).length}
+
+/* ============ ROUTER ============ */
+function go(v,p){S.view=v;S.p=p===undefined?null:p;S.page=1;S.q='';S.shots=[];render();window.scrollTo(0,0)}
+const MAIN=['home','tasks','wallet','refer','profile'];
+function applyTheme(){document.body.classList.toggle('light',LS.get('ec_theme','dark')==='light');const m=document.querySelector('meta[name=theme-color]');if(m)m.content=document.body.classList.contains('light')?'#F3F5FA':'#0D0D14'}
+function render(){
+  const root=$('#app');LISTFN=null;
+  if(!LOADED&&S.view!=='splash'){CONN=true;root.innerHTML='<div class="splash"><div class="logo big">E</div><p class="mu">Connecting to server...</p><p class="mu sm c pad" id="cn"></p><button class="btn xs" onclick="location.reload()">Retry</button></div>';setTimeout(()=>{const e=$('#cn');if(e)e.textContent='Taking long. Check your internet connection and the Firebase database Rules.'},8000);return}CONN=false;
+  curUser();S.admin=!!(S.sess&&S.sess.t==='a');
+  if(S.user&&S.user.banned){S.sess=null;LS.set('ec_sess',null);S.user=null;toast('Account banned','err')}
+  if(S.sess&&S.sess.t==='u'&&!S.user){S.sess=null;LS.set('ec_sess',null)}
+  if(getSet().maint&&!S.admin&&S.view!=='splash'&&S.view!=='auth'){root.innerHTML='<div class="splash"><div class="logo big">E</div><h2>Maintenance</h2><p class="mu c pad">We are improving the app. Please come back soon.</p><button class="btn xs" onclick="A.logout()">Admin login</button></div>';return}
+  const v=S.view;let h='';
+  if(v==='splash')h=V.splash();
+  else if(v==='onb')h=V.onb();
+  else if(!S.sess&&!['terms'].includes(v))h=V.auth();
+  else if(S.admin)h=V.admin();
+  else{const f=V[v]||V.home;h=f();if(MAIN.includes(v))h+=V.nav();if(v==='home')h+=fabs()}
+  root.innerHTML=h;if(LISTFN)refresh();if(S.view==='create'&&!S.admin)A.ccalc();if(S.view==='withdraw'&&!S.admin)A.wcalc();if(document.querySelector('canvas.capc'))newCap();if(S.view==='chat'&&!S.admin){A.chatEnter();liveChat()}if(S.admin&&S.chatUid)liveChat()
+}
+function refresh(){const e=$('#list');if(e&&LISTFN)e.innerHTML=LISTFN()}
+
+/* ============ VIEWS ============ */
+const V={};
+V.splash=()=>{setTimeout(()=>{if(S.view==='splash')go(LS.get('onboardingDone')?'home':'onb')},2000);return '<div class="splash"><div class="logo big">E</div><h1>'+esc(APPN())+'</h1><div class="bar" style="width:160px"><i style="width:0;animation:ld 2s linear forwards"></i></div></div><style>@keyframes ld{to{width:100%}}</style>'};
+V.onb=()=>{const sl=[['Do simple tasks','Watch, like, join and follow. Every approved task pays in USDT.'],['Create your own tasks','Add budget, set a price and let workers grow your channel.'],['Invite friends','You earn a lifetime commission on every task your friend earns, plus a bonus when your friend completes enough tasks.']];const i=S.p||0;return '<div class="splash pad"><div class="logo big">E</div><h1 class="c">'+sl[i][0]+'</h1><p class="mu c">'+sl[i][1]+'</p><div class="dots">'+sl.map((_,k)=>'<i class="'+(k===i?'on':'')+'"></i>').join('')+'</div><div class="grid2" style="width:100%"><button class="btn gh" onclick="A.onbDone()">Skip</button><button class="btn" onclick="'+(i<2?'go(\'onb\','+(i+1)+')':'A.onbDone()')+'">'+(i<2?'Next':'Get Started')+'</button></div></div>'};
+
+V.auth=()=>{const t=S.p||'login',ref=LS.get('ec_ref',''),fails=LS.get('ec_fail',0);let h='<div class="pad"><div class="row" style="margin:10px 0 20px">'+LG('')+'<div><h1>'+esc(APPN())+'</h1><div class="mu sm">'+esc(getApp().tagline)+'</div></div><div style="margin-left:auto;cursor:pointer;font-size:22px" onclick="A.theme(LS.get(\'ec_theme\',\'dark\')===\'light\');render()">&#9728;</div></div><div class="row" style="margin-bottom:14px"><span class="chip '+(t==='login'?'on':'')+'" onclick="go(\'auth\',\'login\')">Login</span><span class="chip '+(t==='reg'?'on':'')+'" onclick="go(\'auth\',\'reg\')">Register</span></div><div class="card col">';
+  if(t==='login')h+='<div><label>EC-ID, Email or Phone</label><input id="lg" autocomplete="username"></div><div><label>Password</label><div class="row"><input id="lp" type="password" autocomplete="current-password"><button class="btn gh xs" onclick="A.eye(\'lp\')">Show</button></div></div>'+capHTML(fails>=2)+'<button class="btn" id="lb" onclick="A.login()">Login</button><div class="c sm"><a class="g" onclick="go(\'auth\',\'forgot\')">Forgot?</a></div>';
+  else if(t==='reg')h+='<div><label>Full name</label><input id="rn"></div><div><label>Email</label><input id="re" type="email"></div><div><label>Phone</label><input id="rp" type="tel"></div><div><label>Password</label><input id="rw" type="password" oninput="A.pw(this.value)"><div class="pw"><i id="pwb" style="width:0"></i></div></div><div><label>Referral code (optional)</label><input id="rr" value="'+esc(ref)+'"></div>'+capHTML(true)+'<label class="row" style="color:var(--tx)"><input type="checkbox" id="rt" style="width:auto"> <span>I agree to <a class="g" href="terms.html" target="_blank">Terms</a> &amp; <a class="g" href="privacy.html" target="_blank">Privacy</a></span></label><button class="btn" id="rb" onclick="A.register()">Create account</button>';
+  else if(t==='forgot2'&&FG)h+='<p class="mu sm">We sent a 6-digit OTP to your email. Check your inbox and spam folder.</p><div><label>OTP</label><input id="fo" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code"></div><div class="g sm" id="fct">OTP valid for 1:00</div><div><label>New password</label><input id="fw" type="password"></div><button class="btn" onclick="A.forgot()">Reset password</button><div class="c sm"><a class="g" onclick="go(\'auth\',\'forgot\')">Send a new OTP</a> &bull; <a class="g" onclick="go(\'auth\',\'login\')">Back to login</a></div>';
+  else h+='<p class="mu sm">Enter the email you registered with. We will send a 6-digit OTP to it. You can reset your password 2 times per day.</p><div><label>Email</label><input id="fe" type="email" autocomplete="email"></div><button class="btn" id="fsb" onclick="A.fgSend()">Send OTP</button><div class="c sm"><a class="g" onclick="go(\'auth\',\'login\')">Back to login</a></div>';
+  return h+'</div><p class="mu sm c" style="margin-top:10px">By continuing, you agree to our <a class="g" href="terms.html" target="_blank">Terms</a> &amp; <a class="g" href="privacy.html" target="_blank">Privacy Policy</a></p>'+landing()+'</div>'};
+
+V.nav=()=>{const it=[['home','&#8962;','Home'],['tasks','&#9776;','Tasks'],['wallet','&#9830;','Wallet'],['refer','&#9733;','Invite'],['profile','&#9786;','Profile']];return '<div class="nav">'+it.map(x=>'<div class="'+(S.view===x[0]?'on':'')+'" onclick="hap();go(\''+x[0]+'\')"><i>'+x[1]+'</i>'+x[2]+'</div>').join('')+'</div>'};
+const BELL='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EDEDF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>';
+const head=(t,back)=>'<div class="row sp" style="padding:14px 16px 4px"><div class="row">'+(back?'<span onclick="go(\''+back+'\')" style="font-size:22px;cursor:pointer">&#8592;</span>':LG(''))+'<h2 style="margin:0">'+esc(t)+'</h2></div><div onclick="go(\'notifs\')" style="position:relative;cursor:pointer;line-height:0">'+BELL+(unread()?'<span class="badge b-r" style="position:absolute;top:-8px;right:-8px;font-size:9px">'+unread()+'</span>':'')+'</div></div>';
+
+V.home=()=>{const u=S.user,l=lvOf(u.tasksDone||0),lo=LV[l-1],hi=LV[l]||LV[9],pc=l>=10?100:Math.min(100,((u.tasksDone||0)-lo)/(hi-lo)*100),ap=getApp();
+  const ds=last7(),vals=ds.map(d=>myLogs(u).filter(x=>['task','ref','refb'].includes(x.type)&&day(x.t)===d).reduce((a,b)=>a+b.amt,0));
+  let tk='';if(ap.tickOn){tk=String(ap.tick||'').split('\n').map(x=>x.trim()).filter(Boolean).join('   \u2022   ');if(!tk)tk=DB.proofs.filter(p=>p.status==='approved').sort((a,b)=>(b.decidedAt||0)-(a.decidedAt||0)).slice(0,5).map(p=>{const w=uBy(p.workerId),t=tBy(p.taskId);return w&&t?esc(w.name)+' '+esc(w.ec)+' just earned '+m(t.price)+' '+esc(t.cat):''}).filter(Boolean).join('   \u2022   ')}
+  return head(APPN())+'<div class="pad">'+(ap.annOn&&ap.ann?'<div class="card" style="border-color:var(--g1)"><b class="g">Notice</b><p class="mu sm" style="margin-top:4px;white-space:pre-wrap">'+esc(ap.ann)+'</p></div>':'')
+  +'<div class="card bal"><div class="grid2"><div><span class="mu sm">Earned (withdrawable)</span><b style="font-size:26px">'+m(u.balance)+'</b></div><div><span class="mu sm">Deposit (for tasks)</span><b style="font-size:26px">'+m(u.dep||0)+'</b></div></div><div class="grid2" style="margin-top:8px"><button class="btn" onclick="go(\'deposit\')">Deposit</button><button class="btn gh" onclick="go(\'withdraw\')">Withdraw</button></div></div>'
+  +'<div class="card"><div class="row sp"><b>Level '+l+'</b><span class="mu sm">'+(u.tasksDone||0)+' tasks done'+(u.verified?' &bull; Verified':'')+'</span></div><div class="bar" style="margin:8px 0"><i style="width:'+pc+'%"></i></div><span class="mu sm">Reward: Level 5 $1, Level 10 $5</span></div>'
+  +'<div class="grid2"><button class="btn gh" onclick="go(\'tasks\')">Find tasks</button><button class="btn gh" onclick="go(\'create\')">Create task</button><button class="btn gh" onclick="go(\'mywork\')">My work</button><button class="btn gh" onclick="go(\'mytasks\')">My tasks</button></div>'
+  +(tk?'<div class="card tick" style="margin-top:12px"><div class="g sm">'+(ap.tick?esc(tk):tk)+'</div></div>':'')
+  +'<div class="card" style="margin-top:12px"><h3>Earnings, last 7 days</h3>'+bars(vals,ds.map(d=>d.slice(8)))+'</div>'
+  +(ap.contest?'<div class="card"><h3>Contest</h3><p class="mu sm" style="margin:4px 0 8px;white-space:pre-wrap">'+esc(ap.contest)+'</p><button class="btn gh xs" onclick="go(\'leader\')">Leaderboard</button></div>':'<div class="card"><button class="btn gh" onclick="go(\'leader\')">Leaderboard</button></div>')+'</div>'};
+
+V.tasks=()=>{LISTFN=()=>{expireTasks();const f=S.f;let a=DB.tasks.filter(t=>t.status==='active'&&now()<t.expires&&t.owner!==S.user.id);
+  if(f.only)a=a.filter(t=>filled(t)<t.max);if(f.ver)a=a.filter(t=>t.verOnly&&S.user.verified);else a=a.filter(t=>!t.verOnly||S.user.verified);
+  if(f.cat!=='All')a=a.filter(t=>t.cat===f.cat);if(S.q)a=a.filter(t=>t.title.toLowerCase().includes(S.q.toLowerCase()));
+  a=a.filter(t=>t.price<=f.max||f.max>=10);
+  a.sort((x,y)=>(y.boost>now())-(x.boost>now())||(f.sort==='price'?y.price-x.price:f.sort==='workers'?filled(y)-filled(x):f.sort==='exp'?x.expires-y.expires:y.created-x.created));
+  if(!a.length)return empty('No tasks available','Create a task',"go('create')");
+  return a.map(t=>{const mine=DB.proofs.find(p=>p.taskId===t.id&&p.workerId===S.user.id);return '<div class="card" onclick="A.task(\''+t.id+'\')"><div class="row sp"><b>'+esc(t.title)+'</b><span class="g"><b>'+m(t.price)+'</b></span></div><div class="row wrap" style="margin-top:6px"><span class="badge b-i">'+esc(t.cat)+'</span>'+(t.boost>now()?'<span class="badge b-p">Boosted</span>':'')+(t.verOnly?'<span class="badge b-a">Verified only</span>':'')+(mine?'<span class="badge b-p">Done</span>':'')+'<span class="mu sm">'+filled(t)+'/'+t.max+' slots</span></div></div>'}).join('')};
+  return head('Tasks')+'<div class="pad"><input placeholder="Search tasks" oninput="A.q(this.value)" style="margin-bottom:10px"><div class="chips">'+['All',...Object.keys(getCats())].map(c=>'<span class="chip '+(S.f.cat===c?'on':'')+'" onclick="A.fcat(\''+c+'\')">'+c+'</span>').join('')+'</div><div class="row" style="margin:8px 0"><select onchange="S.f.sort=this.value;refresh()"><option value="new">Newest</option><option value="price">Highest Price</option><option value="workers">Most Workers</option><option value="exp">Expiry Soon</option></select></div><div class="row sm mu wrap"><label class="row" style="margin:0"><input type="checkbox" style="width:auto" checked onchange="S.f.only=this.checked;refresh()">&nbsp;Only available</label><label class="row" style="margin:0"><input type="checkbox" style="width:auto" onchange="S.f.ver=this.checked;refresh()">&nbsp;Verified only</label></div><div id="list" style="margin-top:12px"></div></div>'};
+
+V.wallet=()=>{const u=S.user,ds=DB.deposits.filter(d=>d.uid===u.id),ws=DB.withdraws.filter(d=>d.uid===u.id);
+  const st=s=>'<span class="badge '+(s==='approved'?'b-a':s==='rejected'?'b-r':'b-p')+'">'+s+'</span>';
+  return head('Wallet')+'<div class="pad"><div class="card bal"><div class="grid2"><div><span class="mu sm">Earned (withdrawable)</span><b style="font-size:26px">'+m(u.balance)+'</b></div><div><span class="mu sm">Deposit (for tasks)</span><b style="font-size:26px">'+m(u.dep||0)+'</b></div></div><p class="mu sm" style="margin:6px 0 10px">Deposited money can only be used to create tasks. Only earned money can be withdrawn.</p><div class="grid2"><button class="btn" onclick="go(\'deposit\')">Deposit</button><button class="btn gh" onclick="go(\'withdraw\')">Withdraw</button></div></div>'
+  +'<h2>My deposits</h2><div class="card">'+(ds.length?ds.map(d=>'<div class="item row sp"><div><b>'+m(d.amt)+'</b> via '+esc(d.method)+'<div class="mu sm">'+fd(d.t)+'</div></div>'+st(d.status)+'</div>').join(''):empty('No deposits yet','Deposit now',"go('deposit')"))+'</div>'
+  +'<h2>My withdrawals</h2><div class="card">'+(ws.length?ws.map(d=>'<div class="item row sp"><div><b>'+m(d.amt)+'</b> to '+esc(d.method)+'<div class="mu sm">'+fd(d.t)+'</div></div>'+st(d.status)+'</div>').join(''):'<p class="mu c">No withdrawals yet</p>')+'</div>'
+  +'<h2>History</h2><div class="card">'+(myLogs(u).length?myLogs(u).slice(0,15).map(x=>'<div class="item row sp"><div>'+esc(x.desc)+'<div class="mu sm">'+fd(x.t)+'</div></div><b class="'+(x.amt<0?'r':'g')+'">'+(x.amt<0?'-':'+')+m(Math.abs(x.amt))+'</b></div>').join(''):'<p class="mu c">Nothing yet</p>')+'</div></div>'};
+
+V.deposit=()=>{const M=getM().dep.filter(x=>x.on&&x.num),set=getSet();
+  if(!M.length)return head('Deposit','wallet')+'<div class="pad">'+empty('Deposit methods disabled')+'</div>';
+  const sel=M.find(x=>x.id===S.method);
+  if(S.step===1||!sel){S.step=1;
+    return head('Deposit','wallet')+'<div class="pad"><div class="card"><h3 style="margin-bottom:10px">1. Choose method</h3><div class="grid2">'+M.map(x=>'<div class="mth '+(S.method===x.id?'on':'')+'" onclick="S.method=\''+x.id+'\';render()"><div class="logo" style="background:'+esc(x.color||'#00D1FF')+';color:#fff">'+esc((x.name||'?')[0].toUpperCase())+'</div>'+esc(x.name)+(x.bonusOn&&x.bonus>0?' <span class="g">+'+x.bonus+'%</span>':'')+'<div class="mu sm">'+(x.type==='usdt'?'USDT':'Send Money')+'</div></div>').join('')+'</div></div><div class="card"><h3 style="margin-bottom:10px">2. Amount ($)</h3><div class="chips" style="flex-wrap:wrap">'+[1,5,10,25,50,100,250,500,1000].map(a=>'<span class="chip '+(+S.amt===a?'on':'')+'" onclick="S.amt='+a+';render()">$'+a+'</span>').join('')+'</div><input id="da" type="number" min="1" placeholder="Min $'+getApp().minDep+'" value="'+esc(S.amt)+'" oninput="S.amt=this.value" style="margin-top:10px"></div><p class="mu sm c" style="margin-bottom:10px">Deposited money can only be used to create tasks. You can withdraw only what you earn.</p><button class="btn" onclick="A.depNext()">Next</button></div>'}
+  const loc=sel.type==='local',a=+S.amt,bn=sel.bonusOn&&sel.bonus>0?sel.bonus:0;
+  return head('Deposit','wallet')+'<div class="pad"><div class="card c"><div class="logo big" style="background:'+esc(sel.color||'#00D1FF')+';color:#fff;margin:0 auto 10px">'+esc((sel.name||'?')[0].toUpperCase())+'</div><div class="mu sm">'+esc(sel.name)+(loc?' number':' address')+'</div><h2 style="margin:6px 0;word-break:break-all">'+esc(sel.num)+'</h2><button class="btn gh xs" onclick="A.copy(\''+esc(sel.num)+'\')">Copy</button><p class="g" style="margin-top:10px"><b>'+(loc?'Send \u09f3'+Math.round(a*set.depRate)+' to this number':'Send '+m(a)+' USDT')+'</b>'+(bn?'<br><span class="sm">+'+bn+'% bonus on this deposit</span>':'')+'</p></div>'
+  +'<div class="card col"><div><label>Amount ($)</label><input id="da2" type="number" min="1" value="'+a+'"></div><div><label>TrxID</label><input id="dt" placeholder="Transaction ID (10+ characters)" maxlength="64"></div><div><label>Screenshot (required)</label><input type="file" accept="image/*" id="df" onchange="A.pick(this,1)"><div class="shots" id="prev" style="margin-top:8px"></div></div><button class="btn" id="db" onclick="A.deposit()">Submit deposit</button><button class="btn gh" onclick="S.step=1;render()">Back</button></div></div>'};
+
+
+V.withdraw=()=>{const u=S.user,M=getM().wd.filter(x=>x.on);
+  if(!M.length)return head('Withdraw','wallet')+'<div class="pad">'+empty('Withdraw methods disabled')+'</div>';
+  return head('Withdraw','wallet')+'<div class="pad"><div class="card bal"><span class="mu sm">Withdrawable (earned)</span><b>'+m(u.balance)+'</b><span class="mu sm">Deposit balance '+m(u.dep||0)+' is only for creating tasks.</span></div><div class="card col"><div><label>Amount ($, min $'+getApp().minWd+')</label><input id="wa" type="number" min="1" oninput="A.wcalc()"></div><div><label>Method</label><select id="wm" onchange="A.wcalc()">'+M.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name)+'</option>').join('')+'</select></div><div class="g sm" id="wr"></div><div><label id="wl">Account number</label><input id="wc"></div><div><label>Password</label><input id="wp" type="password"></div><button class="btn" id="wb" onclick="A.withdraw()">Request withdrawal</button><p class="mu sm c">Pending admin approval. Limit '+getApp().wdDay+' per day.</p></div></div>'};
+
+
+V.create=()=>{const C=getCats(),cs=Object.keys(C),s=getSet();
+  if(!cs.length)return head('Create Task','home')+'<div class="pad">'+empty('No task categories available')+'</div>';
+  const c=cs[0],chip=(id,v,l,on)=>'<span class="chip '+(on?'on':'')+'" data-v="'+v+'" onclick="A.chip(this,\''+id+'\')">'+l+'</span>';
+  return head('Create Task','home')+'<div class="pad"><div class="card col"><div><label>Title</label><input id="ct" maxlength="80"></div><div><label>Description</label><textarea id="cd" rows="3"></textarea></div><div class="grid2"><div><label>Category</label><select id="cc" onchange="A.ccat()">'+cs.map(x=>'<option>'+esc(x)+'</option>').join('')+'</select></div><div><label>Type</label><select id="cs" onchange="A.csub()">'+Object.keys(C[c]).map(x=>'<option>'+esc(x)+'</option>').join('')+'</select></div></div><div><label>Task link</label><input id="cl" placeholder="https://"></div><div><label>Price per worker ($) <span id="cpm" class="mu"></span></label><input id="cp" type="number" step="0.001" value="'+Object.values(C[c])[0]+'" oninput="A.ccalc()"></div><div><label>Workers</label><input id="cw" type="number" min="1" step="1" value="10" oninput="A.ccalc()"><div class="chips" style="margin-top:8px">'+[100,200,1000,2000].map(n=>'<span class="chip" onclick="A.wset('+n+')">'+n+'</span>').join('')+'</div></div><div><label>Screenshots required (one price per task)</label><input type="hidden" id="cn" value="1"><div class="chips">'+[1,2,3].map(n=>chip('cn',n,n+' &bull; '+m(s.shotFee*n),n===1)).join('')+'</div></div><div><label>Expires in</label><input type="hidden" id="cx" value="5"><div class="chips">'+[3,5].map(n=>chip('cx',n,n+' days',n===5)).join('')+'</div></div><div><label>Timer (seconds, optional)</label><input id="cti" type="number" min="0" value="0"></div><label class="row" style="color:var(--tx)"><input type="checkbox" id="ctx" style="width:auto" onchange="$(\'#ctxl\').style.display=this.checked?\'block\':\'none\'">&nbsp;Worker must also write something</label><input id="ctxl" style="display:none" maxlength="80" placeholder="What should the worker write? (e.g. your username)"><label class="row" style="color:var(--tx)"><input type="checkbox" id="cv" style="width:auto">&nbsp;Verified workers only</label><label class="row" style="color:var(--tx)"><input type="checkbox" id="cb" style="width:auto" onchange="A.ccalc()">&nbsp;Boost for 24h (+$0.50)</label><div class="card" id="cs2" style="margin:0"></div><button class="btn" id="cbtn" onclick="A.create()">Create task</button></div></div>'};
+
+V.mytasks=()=>{const a=DB.tasks.filter(t=>t.owner===S.user.id);return head('My Tasks','home')+'<div class="pad">'+(a.length?a.map(t=>{const pend=DB.proofs.filter(p=>p.taskId===t.id&&p.status==='pending').length;return '<div class="card" onclick="go(\'review\',\''+t.id+'\')"><div class="row sp"><b>'+esc(t.title)+'</b><span class="badge '+(t.status==='active'?'b-a':'b-p')+'">'+t.status+'</span></div><div class="mu sm" style="margin-top:6px">'+filled(t)+'/'+t.max+' done &bull; '+m(t.price)+' each &bull; expires '+fd(t.expires)+'</div>'+(pend?'<span class="badge b-p">'+pend+' to review</span>':'')+'</div>'}).join(''):empty('No tasks yet','Create a task',"go('create')"))+'</div>'};
+
+V.review=()=>{const t=tBy(S.p),a=DB.proofs.filter(p=>p.taskId===t.id).sort((x,y)=>y.t-x.t);
+  const bst=p=>({pending:['b-p','Pending'],approved:['b-a','Approved'],rejected:['b-r','Rejected'],appealed:['b-r','Rejected'],rejected_final:['b-r','Rejected']})[p.status];
+  return head('Review proofs','mytasks')+'<div class="pad"><div class="card"><b>'+esc(t.title)+'</b><div class="mu sm">'+m(t.price)+' per worker</div></div>'+(a.length?a.map(p=>{const w=uBy(p.workerId),b=bst(p);return '<div class="card"><div class="row sp"><b>'+esc(w?w.name:'?')+'</b><span class="badge '+b[0]+'">'+b[1]+'</span></div><div class="mu sm">'+fd(p.t)+'</div>'+(p.txt?'<div class="sm" style="margin:6px 0">'+esc(t.textLabel||'Text')+': <b>'+esc(p.txt)+'</b></div>':'')+'<div class="shots" style="margin:8px 0">'+(p.shots||[]).map(s=>'<img src="'+s+'" onclick="img(this.src)">').join('')+'</div>'+(p.status==='pending'?'<div class="grid2"><button class="btn rd" onclick="A.reject(\''+p.id+'\')">Reject</button><button class="btn gn" onclick="A.approve(\''+p.id+'\')">Approve</button></div>':'')+'</div>'}).join(''):empty('Nobody joined yet'))+'</div>'};
+
+V.mywork=()=>{const a=DB.proofs.filter(p=>p.workerId===S.user.id).sort((x,y)=>y.t-x.t);
+  const st={pending:['b-p','Pending'],approved:['b-a','Approved'],rejected:['b-r','Rejected'],appealed:['b-i','Under review'],rejected_final:['b-r','Rejected (final)']};
+  return head('My Work','home')+'<div class="pad">'+(a.length?a.map(p=>{const t=tBy(p.taskId),s=st[p.status];return '<div class="card"><div class="row sp"><b>'+esc(t?t.title:'Task')+'</b><span class="badge '+s[0]+'">'+s[1]+'</span></div><div class="mu sm">'+fd(p.t)+' &bull; '+m(t?t.price:0)+'</div>'+(p.status==='rejected'?'<button class="btn xs" style="margin-top:8px" onclick="A.appeal(\''+p.id+'\')">Appeal to admin</button>':'')+'</div>'}).join(''):empty('No work yet','Find tasks',"go('tasks')"))+'</div>'};
+
+V.refer=()=>{const u=S.user,st=getSet(),rb=getRefB(),link=refLink(),my=DB.users.filter(x=>x.refBy===u.id),td=my.filter(x=>day(x.created)===day()).length;
+  const cap=String(rb.caption).replace(/\{n\}/g,rb.tasks).replace(/\{amt\}/g,m(rb.amt).replace('$',''));
+  return head('Invite')+'<div class="pad"><div class="card c">'+LG('big','margin:0 auto 10px')+'<h2>Earn '+st.refPct+'% for life</h2><p class="mu">You get '+st.refPct+'% of every task your friend earns, for life. It is added instantly.</p></div>'
+  +(rb.on?'<div class="card c"><b class="g">Bonus</b><p class="mu" style="margin-top:4px">'+esc(cap)+'</p></div>':'')
+  +'<div class="card"><label>Share preview</label><div class="row" style="align-items:flex-start">'+LG('md')+'<div class="sm" style="white-space:pre-wrap;word-break:break-word">'+esc(shareText())+'</div></div><button class="btn" style="margin-top:12px" onclick="A.shareNow()">Share</button></div>'
+  +'<div class="card col"><div><label>Your link</label><input readonly value="'+esc(link)+'"></div><div class="grid2"><button class="btn gh" onclick="A.copy(\''+esc(link)+'\')">Copy link</button><button class="btn gh" onclick="A.copy(\''+u.ec+'\')">Copy code '+u.ec+'</button></div><div class="grid2"><button class="btn xs gh" onclick="A.share(\'wa\')">WhatsApp</button><button class="btn xs gh" onclick="A.share(\'tg\')">Telegram</button><button class="btn xs gh" onclick="A.share(\'fb\')">Facebook</button></div></div><div class="grid2"><div class="card c"><h2>'+my.length+'</h2><span class="mu sm">Total referrals</span></div><div class="card c"><h2 class="g">'+m(u.refEarned||0)+'</h2><span class="mu sm">Total earned</span></div><div class="card c"><h2>'+td+'</h2><span class="mu sm">Joined today</span></div><div class="card c"><h2>'+st.refPct+'%</h2><span class="mu sm">Commission</span></div></div><h2>My referrals</h2><div class="card">'+(my.length?my.map(x=>'<div class="item row sp"><span>'+esc(x.name)+' <span class="mu">'+x.ec+'</span></span><span class="mu sm">'+(rb.on?Math.min(x.tasksDone||0,rb.tasks)+'/'+rb.tasks+' tasks':fd(x.created))+'</span></div>').join(''):empty('Nobody joined yet'))+'</div></div>'};
+
+
+V.leader=()=>{const a=[...DB.users].sort((x,y)=>(y.earned||0)-(x.earned||0)).slice(0,10);return head('Leaderboard','home')+'<div class="pad">'+(a.length?a.map((x,i)=>'<div class="card row sp"><div class="row"><b style="width:26px">'+(i===0?'&#9819;':i+1)+'</b>'+AV(x,'')+'<div><b>'+esc(x.name)+'</b><div class="mu sm">'+x.ec+'</div></div></div><b class="g">'+m(x.earned||0)+'</b></div>').join(''):empty('Nobody joined yet'))+'</div>'};
+
+
+V.profile=()=>{const u=S.user;return head('Profile')+'<div class="pad"><div class="card row"><div onclick="A.avatar()" style="position:relative;cursor:pointer">'+(u.avatar?AV(u,'md'):LG('md'))+'<span class="badge b-i" style="position:absolute;bottom:-6px;right:-6px;font-size:9px">Edit</span></div><div><b>'+esc(u.name)+'</b> '+(u.verified?'<span class="badge b-a">Verified</span>':'')+'<div class="mu sm">'+u.ec+'<br>'+esc(u.email)+'</div></div></div><div class="card col"><button class="btn gh" onclick="go(\'mywork\')">My Work</button><button class="btn gh" onclick="go(\'mytasks\')">My Tasks</button><button class="btn gh" onclick="go(\'leader\')">Leaderboard</button><button class="btn gh" onclick="A.kycForm()">KYC Verify (optional) '+(u.kycStatus?'('+u.kycStatus+')':'')+'</button><button class="btn gh" onclick="go(\'support\')">Support</button><button class="btn gh" onclick="A.install()">Install App</button><label class="row sp" style="color:var(--tx)">Sound<input type="checkbox" style="width:auto" '+(UX.sound?'checked':'')+' onchange="UX.sound=this.checked;LS.set(\'ec_ux\',UX)"></label><label class="row sp" style="color:var(--tx)">Haptics<input type="checkbox" style="width:auto" '+(UX.haptic?'checked':'')+' onchange="UX.haptic=this.checked;LS.set(\'ec_ux\',UX)"></label><label class="row sp" style="color:var(--tx)">Dark mode<input type="checkbox" style="width:auto" '+(LS.get('ec_theme','dark')!=='light'?'checked':'')+' onchange="A.theme(this.checked)"></label><button class="btn rd" onclick="A.logout()">Logout</button></div><p class="mu sm c">'+esc(APPN())+' V29 &bull; <a class="g" onclick="A.update()">Check for updates</a></p></div>'};
+
+
+V.support=()=>head('Support','profile')+'<div class="pad"><div class="card"><h2>FAQ</h2>'+FAQ.map(f=>'<div class="faq" onclick="this.classList.toggle(\'open\')"><b>'+f[0]+'</b><p>'+f[1]+'</p></div>').join('')+'</div><div class="card col"><h2>Send a ticket</h2><input id="ts" placeholder="Subject"><textarea id="tm" rows="3" placeholder="Message"></textarea><button class="btn" onclick="A.ticket()">Submit</button></div><div class="card"><h3>My tickets</h3>'+(DB.tickets.filter(t=>t.uid===S.user.id&&t.subj!=='Live chat').sort((a,b)=>b.t-a.t).map(t=>'<div class="item"><b>'+esc(t.subj)+'</b><div class="mu sm">'+esc(t.msg)+'</div>'+(t.reply?'<div class="g sm">'+(t.auto?'Auto reply':'Admin')+': '+esc(t.reply)+'</div>':'<span class="badge b-p">Open</span>')+'</div>').join('')||'<p class="mu c">No tickets</p>')+'</div><p class="mu sm c">Email support@earnchain.pro</p></div>';
+
+
+V.chat=()=>{const c=chatOf(S.user),st=c&&c.status==='closed'?'closed':'open';return head('Live Chat','home')+'<div class="pad"><div class="card" id="cbox" style="min-height:300px;max-height:60vh;overflow-y:auto">'+userChatHTML()+'</div><div id="cctl" data-st="'+st+'">'+userChatCtl(st)+'</div></div>'};
+
+V.notifs=()=>{const to=S.admin?'admin':S.user.id,a=DB.notifs.filter(n=>n.to===to).sort((x,y)=>y.t-x.t);return head('Notifications',S.admin?'':'home')+'<div class="pad"><div class="grid2" style="margin-bottom:10px"><button class="btn gh xs" onclick="A.readAll()">Mark all read</button><button class="btn gh xs" onclick="A.clearN()">Clear all</button></div>'+(a.length?a.map(n=>'<div class="card" style="'+(n.read?'opacity:.6':'')+'">'+esc(n.text)+'<div class="mu sm">'+fd(n.t)+'</div></div>').join(''):empty('No notifications'))+'</div>'};
+
+/* ============ ADMIN ============ */
+const GR=[{id:'dash',n:'Dashboard',subs:[['dash','Dashboard']]},{id:'req',n:'Requests',subs:[['deps','Deposits'],['wds','Withdraws'],['proofs','Task Proofs'],['kyc','KYC'],['disputes','Disputes']]},{id:'usr',n:'Users',subs:[['users','Users']]},{id:'tsk',n:'Tasks',subs:[['tasks','Tasks']]},{id:'fin',n:'Finance',subs:[['pay','Methods'],['prices','Prices'],['hist','History']]},{id:'sup',n:'Support',subs:[['inbox','Live Chat'],['tix','Tickets'],['auto','Auto Reply']]},{id:'set',n:'Settings',subs:[['gen','General'],['app','App Options'],['refs','Referral'],['share','Share & Logo'],['mail','Email OTP'],['bak','Backup']]}];
+const subCnt=id=>({deps:DB.deposits.filter(d=>d.status==='pending').length,wds:DB.withdraws.filter(d=>d.status==='pending').length,proofs:DB.proofs.filter(p=>p.status==='pending').length,kyc:DB.kyc.filter(k=>k.status==='pending').length,disputes:DB.proofs.filter(p=>p.status==='appealed').length,tix:DB.tickets.filter(t=>t.subj!=='Live chat'&&(!t.reply||t.auto==='def')).length,inbox:DB.chats.filter(c=>chatActive(c)&&c.needs).length})[id]||0;
+const cnt=n=>n?'<span class="cnt">'+n+'</span>':'';
+const FORMTABS=['dash','pay','prices','auto','gen','refs','share','mail','bak','inbox','app'];
+const BN=[['dash','Home','&#8962;'],['deps','Deposit','&#8595;'],['wds','Withdraw','&#8593;'],['proofs','Tasks','&#10003;'],['kyc','KYC','&#9745;']];
+V.admin=()=>{const t=S.tab,g=GR.find(x=>x.subs.some(s=>s[0]===t))||GR[0];
+  let h='<div class="anav"><div class="row sp"><div class="row" onclick="A.menu()" style="cursor:pointer">'+LG('')+'<div><b style="font-size:16px">'+esc(APPN())+'</b><div class="mu" style="font-size:10px">Tap logo for menu</div></div></div><div class="row"><span class="live"><i></i>Live</span><button class="btn gh xs" onclick="A.logout()">Logout</button></div></div>'+(t!=='dash'&&g.subs.length>1?'<div class="chips" style="margin-top:8px">'+g.subs.map(s=>'<span class="chip sm '+(t===s[0]?'on':'')+'" onclick="A.tab(\''+s[0]+'\')">'+s[1]+cnt(subCnt(s[0]))+'</span>').join('')+'</div>':'')+'</div><div class="pad">';
+  const F=AD[t]||AD.dash;if(FORMTABS.includes(t))h+=F();else{LISTFN=F;h+=AD.head(t)+'<div id="list"></div>'}
+  return h+'</div><div class="nav">'+BN.map(x=>'<div class="'+(t===x[0]?'on':'')+'" onclick="A.tab(\''+x[0]+'\')" style="position:relative"><i>'+x[2]+'</i>'+x[1]+(x[0]!=='dash'&&subCnt(x[0])?'<span class="cnt" style="position:absolute;top:0;right:14%;margin:0">'+subCnt(x[0])+'</span>':'')+'</div>').join('')+'</div>'};
+
+const srch=()=>'<input placeholder="Search" value="'+esc(S.q)+'" oninput="A.q(this.value)" style="margin-bottom:10px">';
+const AD={};
+const ql=s=>!S.q||String(s).toLowerCase().includes(S.q.toLowerCase());
+const kv=(k,v)=>'<div class="kv"><span>'+k+'</span><b>'+v+'</b></div>';
+AD.head=t=>['users','tasks','hist','proofs','deps','wds'].includes(t)?srch()+(t==='proofs'?'<div class="chips" style="margin-bottom:8px">'+[['pending','Pending'],['appealed','Appealed'],['rejected','Rejected'],['approved','Approved'],['all','All']].map(x=>'<span class="chip '+(S.tf===x[0]?'on':'')+'" onclick="S.tf=\''+x[0]+'\';S.page=1;render()">'+x[1]+'</span>').join('')+'</div>':'')+(t==='hist'?'<div class="grid2" style="margin-bottom:8px"><select onchange="S.hf.type=this.value;S.page=1;refresh()">'+['All','Deposit','Withdraw','Task'].map(x=>'<option>'+x+'</option>').join('')+'</select><select onchange="S.hf.st=this.value;S.page=1;refresh()">'+['All','approved','rejected'].map(x=>'<option>'+x+'</option>').join('')+'</select><input type="date" onchange="S.hf.from=this.value;refresh()"><input type="date" onchange="S.hf.to=this.value;refresh()"></div>':''):'';
+AD.dash=()=>{const p=S.dp===undefined?0:S.dp,[a,b]=rng(p),s=stats(a,b),ds=last7();
+  const dep7=ds.map(d=>DB.deposits.filter(x=>x.status==='approved'&&day(x.at||x.t)===d).reduce((q,x)=>q+x.amt,0)),wd7=ds.map(d=>DB.withdraws.filter(x=>x.status==='approved'&&day(x.at||x.t)===d).reduce((q,x)=>q+x.amt,0));
+  const pd=DB.deposits.filter(x=>x.status==='pending'),pw=DB.withdraws.filter(x=>x.status==='pending');
+  const owE=DB.users.reduce((q,u)=>q+(+u.balance||0),0),owD=DB.users.reduce((q,u)=>q+(+u.dep||0),0);
+  const box=(x,y,z)=>'<div class="card c"><h2 style="font-size:19px">'+x+'</h2><span class="mu sm">'+y+'</span>'+(z?'<div class="mu sm">'+z+'</div>':'')+'</div>';
+  const lb=LS.get('ec_lastbackup',0),warn=now()-lb>7*DAY;
+  const tile=(big,t,sub,tab)=>'<div class="tile" onclick="A.tab(\''+tab+'\')"><div class="tn">'+big+'</div><div><b>'+t+'</b><div class="mu sm">'+sub+'</div></div></div>';
+  return '<div class="tiles grid2" style="margin-bottom:10px">'+tile(DB.users.length,'Users','Total users','users')+tile(DB.tasks.length,'Tasks','Total tasks','tasks')+tile(subCnt('inbox'),'Live Chat','waiting for reply','inbox')+tile(subCnt('disputes'),'Disputes','appeals to review','disputes')+tile('$','Methods','Deposit and withdraw','pay')+tile('%','Prices','Prices, fees, limits','prices')+tile(subCnt('tix'),'Tickets','open tickets','tix')+tile('&#9881;','Settings','App options and more','gen')+'</div><div class="grid2">'+box(pd.length,'Pending deposits',m(pd.reduce((q,x)=>q+x.amt,0)))+box(pw.length,'Pending withdraws',m(pw.reduce((q,x)=>q+x.amt,0)))+'</div>'
+  +'<div class="chips" style="margin:6px 0 10px">'+[['today','Today'],[0,'This month'],[1,monthName(1)],[2,monthName(2)]].map(x=>'<span class="chip '+(p===x[0]?'on':'')+'" onclick="S.dp='+(typeof x[0]==='string'?"'today'":x[0])+';render()">'+x[1]+'</span>').join('')+'</div>'
+  +'<h3 style="margin-bottom:8px">'+(p==='today'?'Today':monthName(p))+'</h3><div class="grid2">'
+  +box(m(s.dep),'Deposits',s.depN+' approved')+box(m(s.wd),'Withdrawals',s.wdN+' approved')+box(m(s.tk),'Tasks added',s.tkN+' tasks')+box(m(s.paid),'Task payouts',s.prN+' approved proofs')
+  +box(m(s.ref+s.refb),'Referral commission','Bonus '+m(s.refb))+box(s.kycN,'KYC approved')+box(s.usN,'New users')+box(m(s.dep-s.wd),'Net (deposit - withdraw)')+'</div>'
+  +'<div class="card"><div class="row sp"><b>App fee earned</b><b class="g">'+m(s.fee)+'</b></div><div class="mu sm" style="margin-top:4px">Deposit '+m(s.dF)+' &bull; Withdraw '+m(s.wF)+' &bull; Task '+m(s.tF)+'</div></div>'
+  +'<h3 style="margin:10px 0 8px">Money held right now</h3><div class="card">'+kv('Users earned balances (withdrawable)',m(owE))+kv('Users deposit wallets (task only)',m(owD))+kv('Pending withdrawals',m(pw.reduce((q,x)=>q+x.amt,0)))+'</div>'
+  +(warn?'<div class="card"><b class="y">Backup reminder</b><p class="mu sm" style="margin:4px 0 8px">'+(lb?'Last backup: '+fd(lb):'No backup yet')+'. Export a backup now so your data is safe.</p><button class="btn xs" onclick="A.exp()">Export backup</button></div>':'')
+  +'<div class="card"><h3>Deposits, last 7 days</h3>'+bars(dep7,ds.map(d=>d.slice(8)))+'</div><div class="card"><h3>Withdraws, last 7 days</h3>'+bars(wd7,ds.map(d=>d.slice(8)))+'</div><div class="card"><h3>Users joined, last 7 days</h3>'+bars(ds.map(d=>DB.users.filter(u=>day(u.created)===d).length),ds.map(d=>d.slice(8)))+'</div>'};
+AD.users=()=>{const a=DB.users.filter(u=>ql([u.ec,u.name,u.email,u.phone].join(' '))).sort((x,y)=>(y.created||0)-(x.created||0));const pg=a.slice((S.page-1)*20,S.page*20);
+  return (pg.map(u=>{const rf=u.refBy&&uBy(u.refBy),rc=DB.users.filter(x=>x.refBy===u.id).length;return '<div class="card"><div class="row sp"><div class="row">'+AV(u,'')+'<b>'+esc(u.name)+'</b></div><span class="badge '+(u.banned?'b-r':'b-a')+'">'+(u.banned?'Banned':'Active')+'</span></div><div style="margin:8px 0">'+kv('Name',esc(u.name))+kv('Gmail',esc(u.email))+kv('Number',esc(u.phone))+kv('User ID','<span class="g">'+u.ec+'</span>')+kv('Balance (earned)',m(u.balance))+kv('Balance (deposit)',m(u.dep||0))+kv('Referred by',rf?esc(rf.name)+' '+rf.ec:'-')+kv('Refer',rc+' friends, '+m(u.refEarned||0)+' earned')+kv('Tasks done',u.tasksDone||0)+kv('Joined',fd(u.created))+(u.kycStatus?kv('KYC',u.kycStatus):'')+'</div><div class="row wrap"><button class="btn xs gh" onclick="A.ban(\''+u.id+'\')">'+(u.banned?'Unban':'Ban')+'</button><button class="btn xs gh" onclick="A.editBal(\''+u.id+'\')">Edit Balance</button><button class="btn xs gh" onclick="A.viewTasks(\''+u.id+'\')">View Tasks</button><button class="btn xs rd" onclick="A.delUser(\''+u.id+'\')">Delete</button></div></div>'}).join('')||empty('No users'))+pager(a.length,20)};
+AD.tasks=()=>{const a=DB.tasks.filter(t=>ql(t.title+t.cat)).sort((x,y)=>y.created-x.created);return (a.slice((S.page-1)*20,S.page*20).map(t=>{const o=uBy(t.owner);return '<div class="card"><div class="row sp"><b>'+esc(t.title)+'</b><span class="g">'+m(t.price)+'</span></div><div class="mu sm">'+esc(t.cat)+' &bull; by '+(o?esc(o.name)+' '+o.ec:'?')+' &bull; '+filled(t)+'/'+t.max+' &bull; '+t.status+'</div><div class="row wrap" style="margin-top:8px"><button class="btn xs gh" onclick="A.workers(\''+t.id+'\')">View workers</button><button class="btn xs gh" onclick="A.editTask(\''+t.id+'\')">Edit</button><button class="btn xs gh" onclick="A.boost(\''+t.id+'\')">Boost</button><button class="btn xs rd" onclick="A.delTask(\''+t.id+'\')">Delete</button></div></div>'}).join('')||empty('No tasks'))+pager(a.length,20)};
+const pstat=s=>({pending:'b-p',approved:'b-a',rejected:'b-r',appealed:'b-i',rejected_final:'b-r'})[s]||'b-p';
+AD.proofs=()=>{let a=DB.proofs.filter(p=>S.tf==='all'||p.status===S.tf||(S.tf==='rejected'&&p.status==='rejected_final'));a=a.filter(p=>{const w=uBy(p.workerId),t=tBy(p.taskId);return ql((w?w.name+w.ec:'')+(t?t.cat+t.title:''))}).sort((x,y)=>y.t-x.t);
+  return (a.slice((S.page-1)*20,S.page*20).map(p=>{const w=uBy(p.workerId),t=tBy(p.taskId);return '<div class="item" onclick="A.proof(\''+p.id+'\')"><div class="row sp"><b>'+esc(w?w.name:'?')+' '+(w?w.ec:'')+'</b><span class="badge '+pstat(p.status)+'">'+p.status.replace('_',' ')+'</span></div><div class="mu sm">'+esc(t?t.cat:'')+' - '+fd(p.t)+', pays '+m(t?t.price:0)+'</div>'+(t?'<div class="mu sm">'+filled(t)+'/'+t.max+' slots active</div>':'')+(p.buyerAct?'<div class="sm y">Buyer: '+esc(p.buyerAct)+'</div>':'')+'</div>'}).join('')||empty('Nothing here'))+pager(a.length,20)};
+AD.disputes=()=>{const a=DB.proofs.filter(p=>p.status==='appealed').sort((x,y)=>y.t-x.t);return a.length?a.map(p=>'<div class="card" onclick="A.proof(\''+p.id+'\')"><div class="row sp"><b>'+esc((uBy(p.workerId)||{}).name)+'</b><span class="badge b-i">Appeal</span></div><div class="mu sm">Reason: '+esc(p.appeal)+'</div></div>').join(''):empty('No disputes')};
+AD.deps=()=>{const a=DB.deposits.filter(d=>d.status==='pending'&&ql(d.name+d.ec+d.trx)).sort((x,y)=>y.t-x.t);return a.length?a.map(d=>'<div class="item" onclick="A.dep(\''+d.id+'\')"><b>'+esc(d.name)+' '+d.ec+' - '+m(d.amt)+' via '+esc(d.method)+'</b> <span class="badge b-p">pending</span><div class="mu sm">'+fd(d.t)+' - TrxID: '+esc(d.trx)+(d.bonus?' - bonus '+d.bonus+'%':'')+'</div></div>').join(''):empty('No pending deposits')};
+AD.wds=()=>{const a=DB.withdraws.filter(d=>d.status==='pending'&&ql(d.name+d.ec)).sort((x,y)=>y.t-x.t);return a.length?a.map(d=>{const usd=d.cur==='usdt'||d.method==='Binance';return '<div class="card"><b>'+esc(d.name)+' '+d.ec+'</b><div class="mu sm">'+m(d.amt)+' via '+esc(d.method)+' &bull; '+esc(d.acc)+' &bull; Send '+(usd?m(d.net):'\u09f3'+Math.round(d.net*getSet().wdRate))+'<br>'+fd(d.t)+'</div><div class="grid2" style="margin-top:8px"><button class="btn rd xs" onclick="A.wd(\''+d.id+'\',0)">Reject</button><button class="btn gn xs" onclick="A.wd(\''+d.id+'\',1)">Approve</button></div></div>'}).join(''):empty('No pending withdraws')};
+AD.pay=()=>{const M=getM();
+  const sec=(key,title,withNum)=>'<h3 style="margin:6px 0 8px">'+title+'</h3>'+M[key].map(x=>'<div class="card col"><div class="row sp"><div class="row"><div class="logo" style="background:'+esc(x.color||'#00D1FF')+';color:#fff;width:30px;height:30px;font-size:15px">'+esc((x.name||'?')[0].toUpperCase())+'</div><b>'+esc(x.name)+'</b><span class="badge b-i">'+(x.type==='usdt'?'USDT':'Local')+'</span></div><label class="row" style="margin:0;color:var(--tx)"><input type="checkbox" style="width:auto" id="mo_'+key+'_'+x.id+'" '+(x.on?'checked':'')+'>&nbsp;ON</label></div><input id="mn_'+key+'_'+x.id+'" value="'+esc(x.name)+'" placeholder="Name">'+(withNum?'<input id="mu_'+key+'_'+x.id+'" value="'+esc(x.num||'')+'" placeholder="'+(x.type==='usdt'?'Wallet address / Pay ID':'Number')+'"><div class="grid2"><label class="row" style="margin:0;color:var(--tx)"><input type="checkbox" style="width:auto" id="mb_'+key+'_'+x.id+'" '+(x.bonusOn?'checked':'')+'>&nbsp;Bonus ON</label><input id="mp_'+key+'_'+x.id+'" type="number" step="0.1" value="'+(x.bonus||0)+'" placeholder="Bonus %"></div>':'')+'<div class="grid2"><button class="btn xs" onclick="A.saveM(\''+key+'\',\''+x.id+'\')">Save</button><button class="btn xs rd" onclick="A.delM(\''+key+'\',\''+x.id+'\')">Delete</button></div></div>').join('')+'<div class="card col"><b>Add new '+title.toLowerCase().replace(' methods',' method')+'</b><input id="an_'+key+'" placeholder="Name (e.g. Upay, USDT ERC-20)"><select id="at_'+key+'"><option value="local">Local (Send Money, \u09f3)</option><option value="usdt">USDT ($)</option></select>'+(withNum?'<input id="au_'+key+'" placeholder="Number / address"><div class="grid2"><label class="row" style="margin:0;color:var(--tx)"><input type="checkbox" style="width:auto" id="ab_'+key+'">&nbsp;Bonus ON</label><input id="ap_'+key+'" type="number" step="0.1" placeholder="Bonus %"></div>':'')+'<button class="btn xs" onclick="A.addM(\''+key+'\')">Add</button></div>';
+  return sec('dep','Deposit methods',true)+sec('wd','Withdraw methods',false)};
+AD.prices=()=>{const C=getCats(),s=getSet();
+  let h='<div class="card col"><h3>Change all prices together</h3><div class="row"><input id="pp" type="number" step="0.1" placeholder="Percent, e.g. 10 or -10"><button class="btn xs" style="white-space:nowrap" onclick="A.pAll()">Apply</button></div><p class="mu sm">Raises or lowers every task price below by that percent.</p></div>';
+  Object.keys(C).forEach(c=>{h+='<div class="card col"><h3>'+esc(c)+'</h3>'+Object.keys(C[c]).map(tp=>'<div class="row sp"><span>'+esc(tp)+'</span><div class="row" style="gap:8px"><input class="pin" style="width:96px" type="number" step="0.001" data-c="'+esc(c)+'" data-t="'+esc(tp)+'" value="'+C[c][tp]+'"><span class="r" style="cursor:pointer;font-size:22px;line-height:1" onclick="A.pDel(this.parentNode.querySelector(\'input\'))">&times;</span></div></div>').join('')+'</div>'});
+  h+='<button class="btn" onclick="A.pSave()">Save all prices</button><div class="card col" style="margin-top:12px"><b>Add a task type</b><input id="pa_c" list="pcl" placeholder="Category (new or existing)"><datalist id="pcl">'+Object.keys(C).map(c=>'<option value="'+esc(c)+'">').join('')+'</datalist><input id="pa_t" placeholder="Type name"><input id="pa_p" type="number" step="0.001" placeholder="Minimum price ($)"><button class="btn xs" onclick="A.pAdd()">Add</button></div>'
+  +'<div class="card col"><h3>Fees and limits</h3><div class="grid2"><div><label>Deposit fee %</label><input id="f_d" type="number" step="0.1" value="'+s.depFee+'"></div><div><label>Withdraw fee %</label><input id="f_w" type="number" step="0.1" value="'+s.wdFee+'"></div><div><label>Task fee %</label><input id="f_t" type="number" step="0.1" value="'+s.taskFee+'"></div><div><label>Screenshot fee per task ($ each)</label><input id="f_s" type="number" step="0.001" value="'+s.shotFee+'"></div></div><div><label>Minimum task budget ($)</label><input id="f_m" type="number" step="0.01" value="'+s.minBudget+'"></div><p class="mu sm">Users do not see deposit and withdraw fees.</p><button class="btn xs" onclick="A.fSave()">Save fees</button></div>';
+  return h};
+AD.hist=()=>{const f=S.hf;let a=[];DB.deposits.filter(d=>d.status!=='pending').forEach(d=>a.push({t:d.at||d.t,u:d.name,ec:d.ec,type:'Deposit',amt:d.amt,st:d.status,shot:d.shot}));DB.withdraws.filter(d=>d.status!=='pending').forEach(d=>a.push({t:d.at||d.t,u:d.name,ec:d.ec,type:'Withdraw',amt:d.amt,st:d.status}));
+  DB.proofs.filter(p=>['approved','rejected','rejected_final'].includes(p.status)).forEach(p=>{const w=uBy(p.workerId),t=tBy(p.taskId);a.push({t:p.decidedAt||p.t,u:w?w.name:'?',ec:w?w.ec:'',type:'Task',amt:t?t.price:0,st:p.status==='approved'?'approved':'rejected',shot:(p.shots||[])[0]})});
+  a=a.filter(x=>(f.type==='All'||x.type===f.type)&&(f.st==='All'||x.st===f.st)&&(!f.from||x.t>=new Date(f.from).getTime())&&(!f.to||x.t<=new Date(f.to).getTime()+DAY)&&ql(x.u+x.ec)).sort((x,y)=>y.t-x.t);
+  return (a.slice((S.page-1)*20,S.page*20).map(x=>'<div class="item row sp"><div><b>'+esc(x.u)+' '+x.ec+'</b><div class="mu sm">'+fd(x.t)+' - '+x.type+' - '+m(x.amt)+'</div></div><div><span class="badge '+(x.st==='approved'?'b-a':'b-r')+'">'+x.st+'</span>'+(x.shot?'<div><a class="g sm" onclick="img(\''+x.shot+'\')">View proof</a></div>':'')+'</div></div>').join('')||empty('No history'))+pager(a.length,20)};
+AD.kyc=()=>{const a=DB.kyc.filter(k=>k.status==='pending').sort((x,y)=>y.t-x.t);return a.length?a.map(k=>'<div class="card row sp" style="cursor:pointer" onclick="A.kycView(\''+k.id+'\')"><div class="row">'+AV(uBy(k.uid)||{name:k.name},'')+'<div><b>'+esc(k.name)+'</b><div class="mu sm">'+esc(k.ec)+'</div></div></div><span class="badge b-p">'+fd(k.t)+'</span></div>').join(''):empty('No pending KYC')};
+AD.tix=()=>{const a=DB.tickets.filter(t=>t.subj!=='Live chat').sort((x,y)=>y.t-x.t);return a.length?a.map(t=>'<div class="card"><div class="row sp"><b>'+esc(t.subj)+'</b><span class="mu sm">'+esc(t.name||'')+' '+esc(t.ec)+'</span></div><p class="mu sm" style="margin:4px 0">'+esc(t.msg)+'</p>'+(t.reply?'<p class="g sm">'+(t.auto==='kw'?'Auto reply: ':t.auto==='def'?'Default reply: ':'Reply: ')+esc(t.reply)+'</p>':'')+(!t.reply||t.auto?'<button class="btn xs" onclick="A.reply(\''+t.id+'\')">'+(t.auto?'Reply now':'Reply')+'</button>':'')+'</div>').join(''):empty('No tickets')};
+AD.auto=()=>{const a=getAuto();return '<div class="card col"><h3>Default reply</h3><p class="mu sm">Sent when no keyword matches in Live Chat.</p><textarea id="ad_def" rows="2">'+esc(a.def)+'</textarea><button class="btn xs" onclick="A.autoDef()">Save</button></div><h3 style="margin:6px 0 4px">Keyword replies</h3><p class="mu sm" style="margin-bottom:8px">If a message contains any keyword (separate with commas), the reply is sent automatically.</p>'+(a.rules||[]).map(r=>'<div class="card col"><input id="ak_'+r.id+'" value="'+esc(r.kw)+'" placeholder="Keywords: deposit, withdraw"><textarea id="ar_'+r.id+'" rows="3" placeholder="Reply">'+esc(r.reply)+'</textarea><div class="grid2"><button class="btn xs" onclick="A.autoSave(\''+r.id+'\')">Save</button><button class="btn xs rd" onclick="A.autoDel(\''+r.id+'\')">Delete</button></div></div>').join('')+'<div class="card col"><b>Add keyword reply</b><input id="ak_new" placeholder="Keywords: deposit, withdraw"><textarea id="ar_new" rows="3" placeholder="Reply text"></textarea><button class="btn xs" onclick="A.autoAdd()">Add</button></div>'};
+AD.gen=()=>{const a=getAdm(),s=getSet();return '<div class="card col"><h3>Admin login</h3><div><label>Admin ID</label><input id="sa" value="'+esc(a.id)+'"></div><div><label>New password (leave empty to keep)</label><input id="sp" type="password"></div><button class="btn xs" onclick="A.saveAdm()">Save</button></div><div class="card col"><h3>Platform</h3><label class="row" style="color:var(--tx)"><input type="checkbox" style="width:auto" id="sm" '+(s.maint?'checked':'')+'>&nbsp;Maintenance mode</label><label class="row" style="color:var(--tx)"><input type="checkbox" style="width:auto" id="sk" '+(s.kycReq?'checked':'')+'>&nbsp;Require KYC before withdraw (OFF = optional)</label><div class="grid2"><div><label>Deposit rate (\u09f3 per $1)</label><input id="sd" type="number" value="'+s.depRate+'"></div><div><label>Withdraw rate (\u09f3 per $1)</label><input id="sw" type="number" value="'+s.wdRate+'"></div></div><button class="btn xs" onclick="A.saveSet()">Save</button></div>'};
+AD.refs=()=>{const s=getSet(),rb=getRefB();return '<div class="card col"><h3>Referral commission</h3><div><label>Commission % on every task your friend earns</label><input id="rf_p" type="number" step="0.1" value="'+s.refPct+'"></div><button class="btn xs" onclick="A.saveRefP()">Save</button></div><div class="card col"><h3>Referral milestone bonus</h3><label class="row" style="color:var(--tx)"><input type="checkbox" style="width:auto" id="rb_on" '+(rb.on?'checked':'')+'>&nbsp;Bonus ON (OFF hides the caption too)</label><div class="grid2"><div><label>Tasks the friend must finish</label><input id="rb_n" type="number" min="1" value="'+rb.tasks+'"></div><div><label>Bonus ($)</label><input id="rb_a" type="number" step="0.001" value="'+rb.amt+'"></div></div><div><label>Caption shown to users</label><textarea id="rb_c" rows="3">'+esc(rb.caption)+'</textarea></div><p class="mu sm">Use {n} for the task count and {amt} for the bonus amount.</p><button class="btn xs" onclick="A.saveRefB()">Save</button></div>'};
+AD.share=()=>{const sh=getShare();return '<div class="card col"><h3>Share caption</h3><p class="mu sm">Sent with the logo when a user shares their referral link. Use {link} for the registration link and {code} for the user referral code.</p><textarea id="sh_c" rows="5">'+esc(sh.caption)+'</textarea><button class="btn xs" onclick="A.saveShare()">Save caption</button></div><div class="card col"><h3>App logo</h3><div class="row">'+LG('md')+'<div class="mu sm">Shown in the app and sent when users share. Tap below to change.</div></div><div class="grid2"><button class="btn xs" onclick="A.logoPick()">Change logo</button><button class="btn xs gh" onclick="A.logoReset()">Use default</button></div></div>'};
+AD.mail=()=>{const c=CFG.email||{};return '<div class="card col"><h3>Email OTP (EmailJS)</h3><p class="mu sm">Sends the forgot-password OTP to the email the user registered with. Create a free account at emailjs.com, connect your Gmail, create a template, then paste the three IDs here.</p><div><label>Service ID</label><input id="em_s" value="'+esc(c.service||'')+'"></div><div><label>Template ID</label><input id="em_t" value="'+esc(c.template||'')+'"></div><div><label>Public key</label><input id="em_k" value="'+esc(c.key||'')+'"></div><button class="btn xs" onclick="A.saveMail()">Save</button></div><div class="card col"><h3>Send a test email</h3><input id="em_to" type="email" placeholder="your@gmail.com"><button class="btn xs" onclick="A.testMail()">Send test OTP</button></div><div class="card"><h3>Template to paste in EmailJS</h3><p class="mu sm" style="margin:6px 0">To Email: {{to_email}}<br>Subject: [EARNCHAIN PRO] Forget password</p><pre style="white-space:pre-wrap;font-size:12px;color:var(--mu)">[EARNCHAIN PRO]\n\nForget password\n\nYour OTP: {{otp}}\nValid: 1 Minutes\n\nDo not share this code.\nThank you!</pre></div>'};
+AD.inbox=()=>{if(S.chatUid)return threadView(S.chatUid);
+  const a=DB.chats.filter(chatActive).sort((x,y)=>(x.needs&&y.needs)?(x.wait||0)-(y.wait||0):x.needs?-1:y.needs?1:(y.lastMsg||0)-(x.lastMsg||0));
+  return '<p class="mu sm" style="margin-bottom:10px">People who wrote in the last 5 minutes. The one waiting longest is on top.</p>'+(a.length?a.map(c=>'<div class="card row sp" style="cursor:pointer" onclick="A.openChat(\''+c.uid+'\')"><div class="row" style="min-width:0">'+AV(uBy(c.uid)||{name:c.name},'')+'<div style="min-width:0"><b>'+esc(c.name)+'</b> <span class="mu sm">'+esc(c.ec)+'</span><div class="mu sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px">'+esc(c.lastText||'')+'</div></div></div><div style="text-align:right;flex:none">'+(c.needs?'<span class="cnt" style="margin:0">Reply</span>':'')+'<div class="mu sm">'+ago(c.lastMsg)+'</div></div></div>').join(''):empty('No active chats'))};
+AD.app=()=>{const a=getApp();const ck=(id,v,l)=>'<label class="row" style="color:var(--tx)"><input type="checkbox" style="width:auto" id="'+id+'" '+(v?'checked':'')+'>&nbsp;'+l+'</label>';
+  return '<div class="card col"><h3>App name</h3><input id="ap_n" value="'+esc(a.name)+'" maxlength="40"><div><label>Tagline (login page)</label><input id="ap_tl" value="'+esc(a.tagline)+'" maxlength="80"></div><div><label>Footer message (login page)</label><textarea id="ap_ft" rows="2">'+esc(a.foot)+'</textarea></div></div>'
+  +'<div class="card col"><h3>Notice on home screen</h3>'+ck('ap_ao',a.annOn,'Show notice')+'<textarea id="ap_a" rows="3" placeholder="Write a notice for all users">'+esc(a.ann)+'</textarea></div>'
+  +'<div class="card col"><h3>Moving message on home</h3>'+ck('ap_to',a.tickOn,'Show moving message')+'<textarea id="ap_t" rows="3" placeholder="One message per line. Leave empty to show recent real earnings.">'+esc(a.tick)+'</textarea></div>'
+  +'<div class="card col"><h3>Contest text on home</h3><textarea id="ap_c" rows="3" placeholder="Leave empty to hide the contest card">'+esc(a.contest)+'</textarea></div>'
+  +'<div class="card col"><h3>Social buttons on home</h3><div><label>Telegram link (empty = hidden)</label><input id="ap_tg" value="'+esc(a.tg)+'" placeholder="https://t.me/yourchannel"></div><div><label>X (Twitter) link (empty = hidden)</label><input id="ap_tw" value="'+esc(a.tw)+'" placeholder="https://x.com/yourpage"></div></div>'
+  +'<div class="card col"><h3>Limits</h3>'+ck('ap_ro',a.regOpen,'Registration open')+'<div class="grid2"><div><label>Min deposit ($)</label><input id="ap_md" type="number" step="0.01" value="'+a.minDep+'"></div><div><label>Min withdraw ($)</label><input id="ap_mw" type="number" step="0.01" value="'+a.minWd+'"></div></div><div><label>Withdrawals per day</label><input id="ap_wd" type="number" min="1" value="'+a.wdDay+'"></div></div><button class="btn" onclick="A.saveApp()">Save all</button>'};
+AD.bak=()=>'<div class="card col"><h3>Backup</h3><button class="btn gh" onclick="A.exp()">Export JSON</button><input type="file" accept=".json" onchange="A.imp(this)"><button class="btn gh" onclick="A.demo()">Load demo data (for testing)</button><button class="btn rd" onclick="A.reset()">Reset all data</button></div><p class="mu sm c">Older screenshots, notifications and wallet history are cleaned automatically after about 3 months. Users, balances and tasks are never removed.</p>';
+
+/* ============ ACTIONS ============ */
+const A={
+theme(d){LS.set('ec_theme',d?'dark':'light');applyTheme()},
+tab(t){S.tab=t;if(t!=='inbox')S.chatUid=null;S.page=1;S.q='';render()},
+pg(n){S.page=n;refresh();window.scrollTo(0,0)},
+q(v){S.q=v;S.page=1;clearTimeout(A._d);A._d=setTimeout(refresh,200)},
+fcat(c){S.f.cat=c;render()},
+eye(id){const e=$('#'+id);e.type=e.type==='password'?'text':'password'},
+pw(v){const s=strength(v),b=$('#pwb');b.style.width=s*25+'%';b.style.background=['#FF4D6A','#FF4D6A','#FFC24D','#00D1FF','#00FF9D'][s]},
+onbDone(){LS.set('onboardingDone',true);go('home')},
+copy(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Copied','ok')).catch(()=>{const e=document.createElement('textarea');e.value=t;document.body.appendChild(e);e.select();try{document.execCommand('copy');toast('Copied','ok')}catch(x){toast('Copy failed','err')}e.remove()})},
+share(w){const link=refLink(),tx=encodeURIComponent(shareText());window.open(w==='wa'?'https://wa.me/?text='+tx:w==='tg'?'https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+tx:'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(link)+'&quote='+tx,'_blank')},
+async shareNow(){const text=shareText();try{const src=CFG.logo||'icon-512.png',blob=await(await fetch(src)).blob(),file=new File([blob],'earnchain.png',{type:blob.type||'image/png'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text});return}}catch(e){if(e&&e.name==='AbortError')return}if(navigator.share){try{await navigator.share({text})}catch(e){}return}A.copy(text)},
+install(){if(window._ip){window._ip.prompt()}else toast('Use browser menu > Add to Home screen')},
+update(){toast('You are on V27, the latest version','ok')},
+logout(){S.sess=null;LS.set('ec_sess',null);go('auth','login')},
+
+/* auth */
+login(){const id=$('#lg').value.trim(),pw=$('#lp').value;if(!id||!pw)return toast('Enter ID and password','err');
+  const fails=LS.get('ec_fail',0);
+  if(fails>=2&&$('#cpi').value.trim()!==CAP){newCap();return toast('Wrong captcha','err')}
+  const bad=()=>{LS.set('ec_fail',fails+1);if(fails+1>=2){const b=$('#capbox');if(b)b.style.display='block'}newCap();$('#lp').value='';return toast('Wrong ID or password','err')};
+  const ad=getAdm();if(id===ad.id&&enc(pw)===ad.pass){LS.set('ec_fail',0);S.sess={t:'a'};LS.set('ec_sess',S.sess);S.tab='dash';return go('admin')}
+  const u=DB.users.find(x=>[x.ec.toLowerCase(),(x.email||'').toLowerCase(),x.phone].includes(id.toLowerCase()));
+  if(!u||u.pass!==enc(pw))return bad();if(u.banned)return toast('Account banned','err');
+  LS.set('ec_fail',0);S.sess={t:'u',id:u.id};LS.set('ec_sess',S.sess);go('home')},
+register(){const n=$('#rn').value.trim(),e=$('#re').value.trim().toLowerCase(),p=$('#rp').value.trim(),w=$('#rw').value,r=$('#rr').value.trim(),bad=x=>{newCap();return toast(x,'err')};
+  if($('#cpi').value.trim()!==CAP)return bad('Wrong captcha');
+  if(!getApp().regOpen)return bad('Registration is closed right now');
+  if(n.length<2)return bad('Enter your name');if(!/^\S+@\S+\.\S+$/.test(e))return bad('Enter a valid email');if(p.length<8)return bad('Enter a valid phone');if(w.length<6)return bad('Password needs 6+ characters');
+  if(!$('#rt').checked)return bad('Accept Terms & Privacy');
+  if(DB.users.some(x=>x.email===e||x.phone===p))return bad('Email or phone already registered');
+  const same=DB.users.filter(x=>x.fp===fp&&now()-x.created<DAY).length;if(same>=3)return bad('Too many accounts from this device. Try later.');
+  const ref=r?uEc(r):null;let refBy=null;if(ref){if(ref.fp===fp)toast('Self-referral blocked','err');else refBy=ref.id}
+  const u={id:uid(),ec:newEc(),name:n,email:e,phone:p,pass:enc(w),balance:0,dep:0,earned:0,refBy,refCode:r.toUpperCase(),fp,created:now(),tasksDone:0,flag:same>=2};
+  DB.users.push(u);if(refBy){notify(refBy,'New Referral Joined '+u.ec,'ref')}save();S.sess={t:'u',id:u.id};LS.set('ec_sess',S.sess);LS.set('ec_ref','');toast('Welcome, your ID is '+u.ec,'ok');go('home')},
+async fgSend(){const em=$('#fe').value.trim().toLowerCase();if(!/^\S+@\S+\.\S+$/.test(em))return toast('Enter your email','err');const u=DB.users.find(x=>(x.email||'').toLowerCase()===em);if(!u)return toast('No account found with this email','err');
+  const d=day();if(u.fgDay===d&&(u.fgN||0)>=2)return toast('Password reset is limited to 2 times per day. Try again tomorrow.','err');
+  const otp=String(100000+Math.floor(Math.random()*900000)),b=$('#fsb');if(b)b.disabled=true;
+  try{await sendOtpMail(em,otp)}catch(e){if(b)b.disabled=false;return toast('Could not send the email: '+String(e.message).slice(0,90),'err')}
+  u.fgN=(u.fgDay===d?(u.fgN||0):0)+1;u.fgDay=d;save();
+  FG={uid:u.id,h:enc('otp|'+otp),exp:now()+120000,tries:0,start:now()};go('auth','forgot2');A.fgTick();toast('OTP sent to your email','ok')},
+fgTick(){clearInterval(A._ft);A._ft=setInterval(()=>{const e=$('#fct');if(!e||!FG){clearInterval(A._ft);return}const left=Math.max(0,60-Math.floor((now()-FG.start)/1000));e.textContent=left>0?'OTP valid for '+Math.floor(left/60)+':'+String(left%60).padStart(2,'0'):'Time is up. If the code does not work, request a new OTP.'},500)},
+forgot(){const o=($('#fo').value||'').trim(),w=$('#fw').value;if(!FG||now()>FG.exp){FG=null;go('auth','forgot');return toast('OTP expired. Request a new one.','err')}
+  if(w.length<6)return toast('Password needs 6+ characters','err');FG.tries++;if(FG.tries>5){FG=null;go('auth','forgot');return toast('Too many wrong attempts. Request a new OTP.','err')}
+  if(enc('otp|'+o)!==FG.h)return toast('Wrong OTP','err');const u=uBy(FG.uid);if(!u)return toast('Account not found','err');u.pass=enc(w);FG=null;save();toast('Password changed. Please login.','ok');go('auth','login')},
+saveMail(){const c={service:$('#em_s').value.trim(),template:$('#em_t').value.trim(),key:$('#em_k').value.trim()};if(!c.service||!c.template||!c.key)return toast('Fill all three fields','err');CFG.email=c;save();toast('Saved','ok')},
+async testMail(){const to=$('#em_to').value.trim();if(!/^\S+@\S+\.\S+$/.test(to))return toast('Enter an email','err');try{await sendOtpMail(to,'123456');toast('Test email sent','ok')}catch(e){toast('Failed: '+String(e.message).slice(0,90),'err')}},
+
+/* tasks */
+task(id){const t=tBy(id),u=S.user;if(!t)return;const mine=DB.proofs.find(p=>p.taskId===id&&p.workerId===u.id);S.shots=[];
+  sheet('<h2>'+esc(t.title)+'</h2><div class="row wrap" style="margin-bottom:10px"><span class="badge b-i">'+esc(t.cat)+' - '+esc(t.sub||'')+'</span><b class="g">'+m(t.price)+'</b><span class="mu sm">'+filled(t)+'/'+t.max+' slots</span></div><p class="mu" style="white-space:pre-wrap;margin-bottom:12px">'+esc(t.desc)+'</p>'
+  +(mine?'<div class="card c">You already did this task ('+mine.status.replace('_',' ')+')</div>':filled(t)>=t.max?'<div class="card c">No slots left</div>':'<button class="btn gh" onclick="A.open(\''+t.id+'\')">Open task link</button><div style="margin:12px 0"><label>Upload '+t.shots+' screenshot'+(t.shots>1?'s':'')+'</label><input type="file" accept="image/*" '+(t.shots>1?'multiple':'')+' onchange="A.pick(this,'+t.shots+')"><div class="shots" id="prev" style="margin-top:8px"></div></div>'+(t.needText?'<div style="margin:12px 0"><label>'+esc(t.textLabel||'Write here')+'</label><input id="wtx" maxlength="200"></div>':'')+'<div class="mu sm" id="tm" style="margin-bottom:8px"></div><button class="btn" id="sb" onclick="A.submit(\''+t.id+'\')">Submit proof</button>'))},
+open(id){const t=tBy(id);openedAt[id]=now();let l=t.link;if(!/^https?:\/\//i.test(l)){return toast('Invalid link','err')}window.open(l,'_blank');const tick=()=>{const e=$('#tm');if(!e)return;const left=Math.ceil((t.timer||0)-(now()-openedAt[id])/1000);e.textContent=left>0?'Wait '+left+'s before submitting':'';if(left>0)setTimeout(tick,500)};tick()},
+async pick(inp,max){if(max===1)S.shots=[];for(const f of inp.files){if(S.shots.length>=max)break;S.shots.push(await compress(f,S.user.ec))}A.prev()},
+prev(){const e=$('#prev');if(e)e.innerHTML=S.shots.map(s=>'<img src="'+s+'">').join('')},
+async submit(id){const t=tBy(id),u=S.user;if(!t)return;if(DB.proofs.find(p=>p.taskId===id&&p.workerId===u.id))return toast('Already done','err');if(now()>t.expires)return toast('Task expired','err');if(filled(t)>=t.max)return toast('No slots left','err');
+  if(t.owner===u.id)return toast('You cannot do your own task','err');if(t.timer&&(!openedAt[id]||now()-openedAt[id]<t.timer*1000))return toast('Open the link and wait for the timer','err');
+  if(S.shots.length<t.shots)return toast('Upload '+t.shots+' screenshot(s)','err');const wtx=t.needText?(($('#wtx')||{}).value||'').trim():'';if(t.needText&&wtx.length<2)return toast('Write what the task asks for','err');
+  const b=$('#sb');if(b)b.disabled=true;let slot=null;
+  try{slot=await claimSlot(t,u)}catch(e){if(b)b.disabled=false;return toast('Could not reserve a slot: '+e.message,'err')}
+  if(slot===null){if(b)b.disabled=false;return toast('No slots left','err')}
+  DB.proofs.push({id:uid(),taskId:id,workerId:u.id,slot,shots:S.shots.slice(0,t.shots),txt:wtx,status:'pending',t:now()});notify(t.owner,'New proof submitted for '+t.title,'proof');save();closeSheet();toast('Proof submitted','ok');render()},
+approve(pid){const p=DB.proofs.find(x=>x.id===pid);if(!p||p.status!=='pending')return;confirmBox('Approve this proof and pay the worker?',()=>{p.buyerAct='Approved by '+(S.user.name)+' '+S.user.ec;payProof(p,'buyer');save();toast('Approved','ok');render()})},
+reject(pid){const p=DB.proofs.find(x=>x.id===pid);sheet('<h2>Reject proof</h2><label>Reason</label><textarea id="rj" rows="3"></textarea><button class="btn rd" style="margin-top:10px" onclick="A.rejectDo(\''+pid+'\')">Reject</button>')},
+rejectDo(pid){const p=DB.proofs.find(x=>x.id===pid),r=$('#rj').value.trim();if(r.length<3)return toast('Write a short reason','err');releaseSlot(p);p.status='rejected';p.buyerAct='Rejected by '+S.user.name+' '+S.user.ec+' ('+r+')';p.decidedAt=now();const t=tBy(p.taskId);notify(p.workerId,'Task proof rejected: '+t.title,'task');notify('admin','Proof rejected by buyer: '+t.title,'admin');save();closeSheet();toast('Rejected','ok');render()},
+appeal(pid){sheet('<h2>Appeal</h2><p class="mu sm">Admin will review your proof. The decision is final.</p><label style="margin-top:10px">Reason</label><textarea id="ar" rows="3"></textarea><button class="btn" style="margin-top:10px" onclick="A.appealDo(\''+pid+'\')">Send appeal</button>')},
+appealDo(pid){const r=$('#ar').value.trim();if(r.length<5)return toast('Explain why in a few words','err');const p=DB.proofs.find(x=>x.id===pid);p.status='appealed';p.appeal=r;notify('admin','New appeal from '+S.user.ec,'admin');save();closeSheet();toast('Appeal sent','ok');render()},
+
+/* create task */
+chip(el,id){el.parentNode.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');$('#'+id).value=el.dataset.v;A.ccalc()},
+wset(n){$('#cw').value=n;A.ccalc()},
+ccat(){const C=getCats(),c=$('#cc').value;$('#cs').innerHTML=Object.keys(C[c]).map(x=>'<option>'+esc(x)+'</option>').join('');A.csub()},
+csub(){const C=getCats(),c=$('#cc').value,s=$('#cs').value;$('#cp').value=C[c][s];A.ccalc()},
+ccalc(){const st=getSet(),p=+$('#cp').value||0,w=Math.floor(+$('#cw').value)||0,n=+$('#cn').value||1,b=$('#cb').checked?.5:0,base=p*w,fee=base*st.taskFee/100,sh=st.shotFee*n,tot=base+fee+sh+b,u=S.user,sp=(+u.dep||0)+(+u.balance||0),unit=p*(1+st.taskFee/100),mx=unit>0?Math.max(0,Math.floor((sp-b-sh)/unit+1e-9)):0;
+  const C=getCats(),mn=(C[$('#cc').value]||{})[$('#cs').value];$('#cpm').textContent=mn?'(min '+m(mn)+')':'';
+  $('#cs2').innerHTML='<div class="row sp g" style="font-size:18px"><b>Total</b><b>'+m(tot)+'</b></div><div class="mu sm" style="margin-top:6px">You have '+m(sp)+'. You can afford up to <b>'+mx+'</b> workers at this price.</div>';return tot},
+create(){const st=getSet(),C=getCats(),c=$('#cc').value,s=$('#cs').value,min=(C[c]||{})[s],t=$('#ct').value.trim(),d=$('#cd').value.trim(),l=$('#cl').value.trim(),p=+$('#cp').value,w=Math.floor(+$('#cw').value),n=+$('#cn').value,days=+$('#cx').value,u=S.user,tot=A.ccalc();
+  if(t.length<4)return toast('Add a title','err');if(d.length<5)return toast('Add a description','err');if(!/^https?:\/\/\S+\.\S+/i.test(l))return toast('Link must start with https://','err');
+  if(!(min>0))return toast('Choose a task type','err');if(p<min)return toast('Minimum price is '+m(min),'err');if(p>100)return toast('Maximum price is $100','err');if(!(w>=1))return toast('Enter the number of workers','err');
+  const base=p*w;if(base<st.minBudget-1e-9)return toast('Minimum task budget is '+m(st.minBudget)+'. Add more workers or raise the price.','err');
+  const sp=(+u.dep||0)+(+u.balance||0);if(tot>sp+1e-9)return toast('Not enough balance. Deposit first.','err');
+  const needText=$('#ctx').checked,tl=$('#ctxl').value.trim();if(needText&&tl.length<2)return toast('Write what the worker should write','err');
+  const boost=$('#cb').checked,useDep=Math.min(+u.dep||0,tot),useEarn=Math.max(0,tot-useDep);
+  if(useDep>0)inc(u,'dep',-useDep);if(useEarn>0)bal(u,-useEarn);addLog(u,'spend',-tot,'Created task: '+t);
+  DB.tasks.push({id:uid(),owner:u.id,title:t,desc:d,cat:c,sub:s,link:l,price:p,max:w,shots:n,timer:Math.max(0,+$('#cti').value||0),verOnly:$('#cv').checked,needText,textLabel:needText?tl:'',perSlot:p*(1+st.taskFee/100),total:tot-(boost?.5:0),paid:tot,fromDep:useDep,fromEarn:useEarn,fee:tot-base,created:now(),expires:now()+days*DAY,boost:boost?now()+DAY:0,status:'active'});
+  save();toast('Task created','ok');go('mytasks')},
+
+/* wallet */
+depNext(){if(!S.method)return toast('Select a method','err');const a=+S.amt;if(!(a>=getApp().minDep))return toast('Minimum deposit is '+m(getApp().minDep),'err');S.step=2;render()},
+deposit(){const a=+$('#da2').value,tx=$('#dt').value.trim(),M=getM().dep.find(x=>x.id===S.method);if(!M)return toast('Select a method','err');if(!(a>=getApp().minDep))return toast('Minimum deposit is '+m(getApp().minDep),'err');if(!/^[A-Za-z0-9]{10,64}$/.test(tx))return toast('TrxID must be 10+ letters/numbers','err');
+  if(DB.deposits.some(d=>String(d.trx).toLowerCase()===tx.toLowerCase()))return toast('TrxID already used','err');if(!S.shots.length)return toast('Upload the payment screenshot','err');
+  const u=S.user;DB.deposits.push({id:uid(),uid:u.id,name:u.name,ec:u.ec,amt:a,method:M.name,key:M.id,cur:M.type,bonus:M.bonusOn&&M.bonus>0?+M.bonus:0,trx:tx,shot:S.shots[0],status:'pending',t:now()});
+  notify('admin','New deposit '+m(a)+' from '+u.ec,'admin');save();S.step=1;S.method=null;S.amt='';toast('Deposit submitted','ok');go('wallet')},
+wcalc(){const M=getM().wd.find(x=>x.id===$('#wm').value),a=+$('#wa').value||0,n=a*(1-getSet().wdFee/100),l=$('#wl');if(l&&M)l.textContent=M.type==='usdt'?'Wallet address / Pay ID':'Account number';$('#wr').textContent=a&&M?('You receive: '+(M.type==='usdt'?m(n):'\u09f3'+Math.round(n*getSet().wdRate))):''},
+withdraw(){const u=S.user,a=+$('#wa').value,M=getM().wd.find(x=>x.id===$('#wm').value),ac=$('#wc').value.trim(),st=getSet();if(!M)return toast('Select a method','err');
+  if(st.kycReq&&!u.verified){toast('KYC verification is required to withdraw','err');return A.kycForm()}
+  if(!(a>=getApp().minWd))return toast('Minimum withdrawal is '+m(getApp().minWd),'err');if(a>(+u.balance||0)+1e-9)return toast('Not enough earned balance. Deposited money cannot be withdrawn.','err');if(ac.length<5)return toast('Enter your account number','err');
+  if(enc($('#wp').value)!==u.pass)return toast('Wrong password','err');
+  if(DB.withdraws.filter(w=>w.uid===u.id&&day(w.t)===day()).length>=getApp().wdDay)return toast('Limit reached: '+getApp().wdDay+' withdrawals per day','err');
+  bal(u,-a);addLog(u,'withdraw',-a,'Withdraw request');DB.withdraws.push({id:uid(),uid:u.id,name:u.name,ec:u.ec,amt:a,net:a*(1-st.wdFee/100),fee:a*st.wdFee/100,method:M.name,cur:M.type,acc:ac,status:'pending',t:now()});notify('admin','New withdraw '+m(a)+' from '+u.ec,'admin');save();toast('Withdrawal requested','ok');go('wallet')},
+kycForm(){if(S.user.kycStatus==='pending')return toast('KYC is pending review');if(S.user.verified)return toast('You are verified','ok');S.ks=[null,null,null];
+  sheet('<h2>KYC Verify</h2><div class="col"><div class="grid2"><div><label>First name</label><input id="k_f"></div><div><label>Last name</label><input id="k_l"></div></div><div class="grid2"><div><label>Date of birth</label><input id="k_d" type="date"></div><div><label>Place of birth</label><input id="k_p"></div></div><div><label>NID number</label><input id="k_n" inputmode="numeric"></div><div><label>NID front photo</label><input type="file" accept="image/*" onchange="A.pickK(this,0)"><div class="shots" id="kp0" style="margin-top:6px"></div></div><div><label>NID back photo</label><input type="file" accept="image/*" onchange="A.pickK(this,1)"><div class="shots" id="kp1" style="margin-top:6px"></div></div><div><label>Your photo (selfie)</label><input type="file" accept="image/*" onchange="A.pickK(this,2)"><div class="shots" id="kp2" style="margin-top:6px"></div></div><button class="btn" onclick="A.kycSend()">Submit</button></div>')},
+async pickK(inp,i){const f=inp.files[0];if(!f)return;S.ks[i]=await compress(f,S.user.ec);const e=$('#kp'+i);if(e)e.innerHTML='<img src="'+S.ks[i]+'">'},
+kycSend(){const f=$('#k_f').value.trim(),l=$('#k_l').value.trim(),d=$('#k_d').value,p=$('#k_p').value.trim(),n=$('#k_n').value.trim();if(f.length<2||l.length<1)return toast('Enter first and last name','err');if(!d)return toast('Enter date of birth','err');if(p.length<2)return toast('Enter place of birth','err');if(n.length<8)return toast('Enter the NID number','err');if(!S.ks||S.ks.some(x=>!x))return toast('Upload all 3 photos','err');
+  DB.kyc.push({id:uid(),uid:S.user.id,ec:S.user.ec,name:f+' '+l,first:f,last:l,dob:d,pob:p,nid:n,shots:S.ks.slice(0,3),status:'pending',t:now()});S.user.kycStatus='pending';notify('admin','New KYC from '+S.user.ec,'admin');save();closeSheet();toast('KYC submitted','ok');render()},
+kycView(id){const k=DB.kyc.find(x=>x.id===id);if(!k)return;const lb=['NID front','NID back','Selfie'];
+  sheet('<h2>'+esc(k.name)+'</h2><div class="mu sm" style="margin-bottom:8px">'+esc(k.ec)+'</div><div class="card">'+kv('First name',esc(k.first||''))+kv('Last name',esc(k.last||''))+kv('Date of birth',esc(k.dob||''))+kv('Place of birth',esc(k.pob||''))+kv('NID number',esc(k.nid||''))+'</div>'+(k.shots||[]).map((s,i)=>'<div class="mu sm" style="margin:8px 0 4px">'+lb[i]+'</div><img src="'+s+'" style="width:100%;border-radius:12px" onclick="img(this.src)">').join('')+'<div class="grid2" style="margin-top:12px"><button class="btn rd" onclick="A.kycAct(\''+id+'\',0)">Reject</button><button class="btn gn" onclick="A.kycAct(\''+id+'\',1)">Approve</button></div>')},
+kycAct(id,ok){const k=DB.kyc.find(x=>x.id===id),u=uBy(k.uid);if(k.status!=='pending')return;k.status=ok?'approved':'rejected';k.at=now();if(u){u.kycStatus=ok?'approved':'rejected';if(ok){u.verified=true;bal(u,.5);addLog(u,'bonus',.5,'KYC bonus')}notify(u.id,ok?'KYC approved. $0.50 bonus added':'KYC rejected','kyc')}save();closeSheet();render()},
+
+ticket(){const s=$('#ts').value.trim(),g=$('#tm').value.trim();if(!s||!g)return toast('Fill subject and message','err');const mt=autoMatch(s+' '+g),o={id:uid(),uid:S.user.id,ec:S.user.ec,name:S.user.name,subj:s,msg:g,t:now()};if(mt){o.reply=mt;o.auto='kw'}DB.tickets.push(o);notify('admin','New ticket from '+S.user.ec,'admin');save();toast('Ticket sent','ok');render()},
+chatEnter(){const u=S.user;if(!u)return;const c=chatEnsure(u),t=now();if(c.status==='open'){let ch=false;if(t-(c.lastSeen||0)>10000){c.lastSeen=t;ch=true}if((c.uSeen||0)<(c.lastAT||0)||t-(c.uSeen||0)>10000){c.uSeen=t;ch=true}if(ch)save()}closeIdleChats(u.id)},
+chat(){const i=$('#cm'),v=i.value.trim();if(!v)return;const u=S.user,c=chatEnsure(u);if(c.status==='closed')return A.chatNew();const t=now(),hadAuto=chatMsgs(c).some(x=>x.from==='s'&&!x.sys);
+  DB.chatmsgs.push({id:uid(),uid:u.id,n:c.n,from:'u',text:v,t});c.lastMsg=t;c.lastUserMsg=t;c.lastSeen=t;c.uSeen=t;c.name=u.name;c.ec=u.ec;c.lastText=v.slice(0,80);
+  const mt=autoMatch(v);if(mt){DB.chatmsgs.push({id:uid(),uid:u.id,n:c.n,from:'s',text:mt,t:t+1});c.lastAT=t+1}else{c.needs=true;if(!c.wait)c.wait=t;if(!hadAuto){DB.chatmsgs.push({id:uid(),uid:u.id,n:c.n,from:'s',text:getAuto().def,t:t+1});c.lastAT=t+1}}
+  i.value='';save();liveChat()},
+chatNew(){const u=S.user,c=chatEnsure(u);c.n=(c.n||1)+1;c.status='open';c.started=now();c.lastMsg=0;c.lastUserMsg=0;c.lastSeen=now();c.lastText='';c.needs=false;c.wait=0;c.uSeen=now();c.lastAT=0;delete c.closedAt;save();render()},
+openChat(uid){S.chatUid=uid;render()},
+chatBack(){S.chatUid=null;render()},
+achat(){const i=$('#am'),v=i.value.trim();if(!v||!S.chatUid)return;const c=DB.chats.find(x=>x.uid===S.chatUid);if(!c||c.status==='closed')return toast('This chat is closed','err');const t=now();DB.chatmsgs.push({id:uid(),uid:c.uid,n:c.n,from:'a',text:v,t});c.lastMsg=t;c.lastAT=t;c.lastText='You: '+v.slice(0,70);c.needs=false;c.wait=0;i.value='';save();liveChat()},
+menu(){sheet('<h2>Menu</h2>'+GR.filter(g=>g.id!=='dash').map(g=>'<h3 class="mu" style="margin:12px 0 6px">'+g.n+'</h3><div class="chips" style="flex-wrap:wrap">'+g.subs.map(s=>'<span class="chip" onclick="closeSheet();A.tab(\''+s[0]+'\')">'+s[1]+cnt(subCnt(s[0]))+'</span>').join('')+'</div>').join('')+'<button class="btn gh" style="margin-top:16px" onclick="closeSheet();A.tab(\'dash\')">Dashboard</button>')},
+saveApp(){const g=id=>$('#'+id),ok=u=>!u||/^https?:\/\/\S+\.\S+/i.test(u);const tg=g('ap_tg').value.trim(),tw=g('ap_tw').value.trim();if(!ok(tg)||!ok(tw))return toast('Links must start with https://','err');const nm=g('ap_n').value.trim();if(nm.length<2)return toast('Enter an app name','err');
+  CFG.app={name:nm,tagline:g('ap_tl').value.trim(),foot:g('ap_ft').value.trim(),annOn:g('ap_ao').checked,ann:g('ap_a').value.trim(),tickOn:g('ap_to').checked,tick:g('ap_t').value.trim(),contest:g('ap_c').value.trim(),tg,tw,regOpen:g('ap_ro').checked,minDep:Math.max(.01,+g('ap_md').value||1),minWd:Math.max(.01,+g('ap_mw').value||1),wdDay:Math.max(1,Math.floor(+g('ap_wd').value||3))};save();document.title=nm;toast('Saved','ok')},
+readAll(){const to=S.admin?'admin':S.user.id;DB.notifs.filter(n=>n.to===to).forEach(n=>n.read=true);save();render()},
+clearN(){const to=S.admin?'admin':S.user.id;DB.notifs=DB.notifs.filter(n=>n.to!==to);save();render()},
+
+/* admin */
+proof(pid){const p=DB.proofs.find(x=>x.id===pid),w=uBy(p.workerId),t=tBy(p.taskId),b=t&&uBy(t.owner);
+  const can=['pending','rejected','appealed','rejected_final'].includes(p.status);
+  sheet('<h2>'+esc(w?w.name:'?')+' '+(w?w.ec:'')+'</h2><div class="mu sm" style="margin-bottom:8px">'+esc(t?t.title:'')+' - pays '+m(t?t.price:0)+'<br>Buyer: '+(b?esc(b.name)+' '+b.ec:'?')+'<br>Status: '+p.status.replace('_',' ')+'</div>'+(p.buyerAct?'<div class="card y sm">Buyer decision: '+esc(p.buyerAct)+'</div>':'')+(p.appeal?'<div class="card sm">Worker appeal: '+esc(p.appeal)+'</div>':'')+(p.txt?'<div class="card sm">'+esc((t&&t.textLabel)||'Text')+': <b>'+esc(p.txt)+'</b></div>':'')+'<div class="shots" style="margin-bottom:12px">'+(p.shots||[]).map(s=>'<img src="'+s+'" onclick="img(this.src)">').join('')+'</div>'
+  +(can?'<div class="grid2">'+(p.status==='rejected_final'?'<span></span>':'<button class="btn rd" onclick="A.pDo(\''+pid+'\',0)">Reject</button>')+'<button class="btn gn" onclick="A.pDo(\''+pid+'\',1)">Approve</button></div>':'<div class="c mu">Final: '+p.status+'</div>'))},
+pDo(pid,ok){const p=DB.proofs.find(x=>x.id===pid),t=tBy(p.taskId);if(ok){payProof(p,'admin');p.adminAct='Approved by admin';}else{releaseSlot(p);p.status='rejected_final';p.adminAct='Rejected by admin';p.decidedAt=now();notify(p.workerId,'Task proof rejected (final): '+t.title,'task')}save();closeSheet();toast(ok?'Approved and paid':'Rejected','ok');render()},
+dep(id){const d=DB.deposits.find(x=>x.id===id);sheet('<h2>'+esc(d.name)+' '+d.ec+'</h2><p class="mu sm">'+m(d.amt)+' via '+esc(d.method)+' - '+fd(d.t)+(d.bonus?' - bonus '+d.bonus+'%':'')+'<br>TrxID: '+esc(d.trx)+'</p>'+(d.shot?'<img src="'+d.shot+'" style="width:100%;border-radius:12px;margin:10px 0">':'')+'<div class="grid2"><button class="btn rd" onclick="A.depDo(\''+id+'\',0)">Reject</button><button class="btn gn" onclick="A.depDo(\''+id+'\',1)">Approve</button></div>')},
+depDo(id,ok){const d=DB.deposits.find(x=>x.id===id),u=uBy(d.uid);if(d.status!=='pending')return;d.status=ok?'approved':'rejected';d.at=now();
+  if(ok&&u){const f0=getSet().depFee/100,bn=d.bonus!==undefined?d.bonus:(d.key==='binance'?5:0),c=d.amt*(1-f0)*(1+bn/100);d.fee=d.amt*f0;inc(u,'dep',c);addLog(u,'deposit',c,'Deposit approved (use for tasks)');notify(u.id,'Deposit Approved '+m(d.amt),'deposit')}else if(u)notify(u.id,'Deposit rejected '+m(d.amt),'deposit');save();closeSheet();toast('Done','ok');render()},
+wd(id,ok){const d=DB.withdraws.find(x=>x.id===id),u=uBy(d.uid);if(d.status!=='pending')return;d.status=ok?'approved':'rejected';d.at=now();if(!ok&&u){bal(u,d.amt);addLog(u,'refund',d.amt,'Withdraw rejected, refunded')}if(u)notify(u.id,ok?'Withdraw Approved '+m(d.amt):'Withdraw rejected, balance refunded','withdraw');save();toast('Done','ok');render()},
+
+saveAdm(){const id=$('#sa').value.trim(),p=$('#sp').value,a=Object.assign({},getAdm());if(id.length<4)return toast('ID too short','err');a.id=id;if(p){if(p.length<6)return toast('Password needs 6+ characters','err');a.pass=enc(p)}CFG.admin=a;save();toast('Saved','ok')},
+saveSet(){setSet({maint:$('#sm').checked,kycReq:$('#sk').checked,depRate:+$('#sd').value||130,wdRate:+$('#sw').value||123});toast('Saved','ok')},
+ban(id){const u=uBy(id);u.banned=!u.banned;save();refresh()},
+editBal(id){const u=uBy(id);sheet('<h2>Edit balance</h2><p class="mu sm">'+esc(u.name)+' '+u.ec+'</p><label>Earned balance (withdrawable)</label><input id="eb" type="number" step="0.001" value="'+(+u.balance||0)+'"><label style="margin-top:8px">Deposit balance (task only)</label><input id="ebd" type="number" step="0.001" value="'+(+u.dep||0)+'"><button class="btn" style="margin-top:10px" onclick="A.ebDo(\''+id+'\')">Save</button>')},
+ebDo(id){const u=uBy(id),v=+$('#eb').value,w=+$('#ebd').value;if(isNaN(v)||v<0||isNaN(w)||w<0)return toast('Invalid amount','err');const v0=+u.balance||0,w0=+u.dep||0;if(v!==v0){addLog(u,'admin',v-v0,'Balance edited by admin');bal(u,v-v0)}if(w!==w0){addLog(u,'admin',w-w0,'Deposit balance edited by admin');inc(u,'dep',w-w0)}save();closeSheet();refresh()},
+viewTasks(id){const a=DB.tasks.filter(t=>t.owner===id);sheet('<h2>Tasks</h2>'+(a.map(t=>'<div class="item"><b>'+esc(t.title)+'</b><div class="mu sm">'+m(t.price)+' - '+t.status+'</div></div>').join('')||'<p class="mu c">No tasks</p>'))},
+delUser(id){confirmBox('Delete this user?',()=>{DB.users=DB.users.filter(u=>u.id!==id);save();refresh()})},
+delTask(id){confirmBox('Delete this task?',()=>{DB.tasks=DB.tasks.filter(t=>t.id!==id);DB.claims=DB.claims.filter(c=>c.taskId!==id);save();refresh()})},
+boost(id){const t=tBy(id);t.boost=t.boost>now()?0:now()+DAY;save();refresh()},
+editTask(id){const t=tBy(id);sheet('<h2>Edit task</h2><div class="col"><input id="et" value="'+esc(t.title)+'"><textarea id="ed" rows="3">'+esc(t.desc)+'</textarea><button class="btn" onclick="A.etDo(\''+id+'\')">Save</button></div>')},
+etDo(id){const t=tBy(id);t.title=$('#et').value.trim()||t.title;t.desc=$('#ed').value.trim()||t.desc;save();closeSheet();refresh()},
+workers(id){const a=DB.proofs.filter(p=>p.taskId===id);sheet('<h2>Workers</h2>'+(a.map(p=>{const w=uBy(p.workerId);return '<div class="item" onclick="A.proof(\''+p.id+'\')"><b>'+esc(w?w.name:'?')+'</b> <span class="badge '+pstat(p.status)+'">'+p.status.replace('_',' ')+'</span></div>'}).join('')||'<p class="mu c">Nobody joined yet</p>'))},
+reply(id){sheet('<h2>Reply</h2><textarea id="rp2" rows="3"></textarea><button class="btn" style="margin-top:10px" onclick="A.replyDo(\''+id+'\')">Send reply</button>')},
+replyDo(id){const t=DB.tickets.find(x=>x.id===id);t.reply=$('#rp2').value.trim();if(!t.reply)return;delete t.auto;notify(t.uid,'Support replied: '+t.reply,'support');save();closeSheet();render()},
+exp(){const b=new Blob([JSON.stringify({db:DB,cfg:CFG})],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);const d=new Date();a.download='backup_'+String(d.getDate()).padStart(2,'0')+d.toLocaleString('en',{month:'short'})+d.getFullYear()+'.json';a.click();LS.set('ec_lastbackup',now())},
+imp(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.db||!j.db.users)throw 0;COLS.forEach(c=>{DB[c]=Array.isArray(j.db[c])?j.db[c]:[]});if(j.cfg)CFG=j.cfg;else{if(j.pay)CFG.pay=j.pay;if(j.adm)CFG.admin=j.adm;if(j.set)CFG.settings=j.set}save();toast('Restored','ok');render()}catch(e){toast('Invalid backup file','err')}};r.readAsText(f)},
+reset(){sheet('<h2>Reset all data</h2><p class="mu sm" style="margin-bottom:10px">This deletes all users, tasks and history from the server and cannot be undone. Type RESET to confirm.</p><input id="rsx" placeholder="RESET"><button class="btn rd" style="margin-top:10px" onclick="A.resetDo()">Delete everything</button>')},
+resetDo(){if($('#rsx').value.trim()!=='RESET')return toast('Type RESET to confirm','err');COLS.forEach(c=>{DB[c]=[]});save();closeSheet();toast('Reset done','ok');render()},
+grp(id){const g=GR.find(x=>x.id===id);if(!g.subs.some(s=>s[0]===S.tab))S.tab=g.subs[0][0];S.page=1;S.q='';render()},
+saveM(sec,id){const M=JSON.parse(JSON.stringify(getM())),x=M[sec].find(y=>y.id===id);if(!x)return;const nm=$('#mn_'+sec+'_'+id).value.trim().replace(/[.$#\[\]\/]/g,'');if(!nm)return toast('Enter a name','err');x.name=nm;x.on=$('#mo_'+sec+'_'+id).checked;
+  if(sec==='dep'){x.num=$('#mu_'+sec+'_'+id).value.trim();x.bonusOn=$('#mb_'+sec+'_'+id).checked;x.bonus=Math.max(0,+$('#mp_'+sec+'_'+id).value||0);if(x.on&&!x.num)return toast('Add the number/address before turning ON','err')}
+  CFG.methods={v:2,dep:M.dep,wd:M.wd};save();toast('Saved','ok')},
+delM(sec,id){confirmBox('Delete this method?',()=>{const M=JSON.parse(JSON.stringify(getM()));M[sec]=M[sec].filter(y=>y.id!==id);CFG.methods={v:2,dep:M.dep,wd:M.wd};save();render()})},
+addM(sec){const nm=$('#an_'+sec).value.trim().replace(/[.$#\[\]\/]/g,''),ty=$('#at_'+sec).value;if(!nm)return toast('Enter a name','err');const M=JSON.parse(JSON.stringify(getM())),x={id:'m'+uid(),name:nm,type:ty,on:true,color:['#00D1FF','#FF8A00','#7C4DFF','#00C853','#FF4081'][M[sec].length%5]};
+  if(sec==='dep'){x.num=$('#au_dep').value.trim();if(!x.num)return toast('Enter the number/address','err');x.bonusOn=$('#ab_dep').checked;x.bonus=Math.max(0,+$('#ap_dep').value||0)}
+  M[sec].push(x);CFG.methods={v:2,dep:M.dep,wd:M.wd};save();toast('Added','ok');render()},
+pSave(){const o={};let bad=0;document.querySelectorAll('.pin').forEach(i=>{const c=i.dataset.c,t=i.dataset.t,v=+i.value;if(!(v>0)){bad=1;return}(o[c]=o[c]||{})[t]=Math.round(v*1e6)/1e6});if(bad)return toast('Every price must be above 0','err');CFG.prices=o;save();toast('Prices saved','ok')},
+pAll(){const pc=+$('#pp').value;if(!pc||pc<=-100)return toast('Enter a percent like 10 or -10','err');const C=JSON.parse(JSON.stringify(getCats()));Object.keys(C).forEach(c=>Object.keys(C[c]).forEach(t=>{C[c][t]=Math.max(.001,Math.round(C[c][t]*(1+pc/100)*1e6)/1e6)}));CFG.prices=C;save();toast('All prices changed by '+pc+'%','ok');render()},
+pDel(i){const c=i.dataset.c,t=i.dataset.t;confirmBox('Remove "'+t+'" from '+c+'?',()=>{const C=JSON.parse(JSON.stringify(getCats()));delete C[c][t];if(!Object.keys(C[c]).length)delete C[c];CFG.prices=Object.keys(C).length?C:DEFCATS;save();render()})},
+pAdd(){const c=$('#pa_c').value.trim().replace(/[.$#\[\]\/]/g,''),t=$('#pa_t').value.trim().replace(/[.$#\[\]\/]/g,''),p=+$('#pa_p').value;if(!c||!t||!(p>0))return toast('Enter category, type and a price','err');const C=JSON.parse(JSON.stringify(getCats()));(C[c]=C[c]||{})[t]=p;CFG.prices=C;save();toast('Added','ok');render()},
+fSave(){const g=id=>+$('#'+id).value,v={depFee:g('f_d'),wdFee:g('f_w'),taskFee:g('f_t'),shotFee:g('f_s'),minBudget:g('f_m')};if(Object.values(v).some(x=>isNaN(x)||x<0))return toast('Enter valid numbers','err');if(v.depFee>50||v.wdFee>50||v.taskFee>50)return toast('Fees cannot be above 50%','err');setSet(v);toast('Saved','ok')},
+saveRefP(){const v=+$('#rf_p').value;if(isNaN(v)||v<0||v>100)return toast('Enter 0 to 100','err');setSet({refPct:v});toast('Saved','ok')},
+saveRefB(){const n=Math.max(1,Math.floor(+$('#rb_n').value||10)),a=+$('#rb_a').value;if(isNaN(a)||a<0)return toast('Enter a valid bonus','err');CFG.refb={on:$('#rb_on').checked,tasks:n,amt:a,caption:$('#rb_c').value.trim()||getRefB().caption};save();toast('Saved','ok')},
+saveShare(){const c=$('#sh_c').value.trim();if(!c)return toast('Write a caption','err');CFG.share={caption:c};save();toast('Saved','ok')},
+autoDef(){const v=$('#ad_def').value.trim();if(!v)return toast('Write a reply','err');CFG.auto={def:v,rules:getAuto().rules||[]};save();toast('Saved','ok')},
+autoAdd(){const k=$('#ak_new').value.trim(),r=$('#ar_new').value.trim();if(!k||!r)return toast('Add keywords and a reply','err');const a=getAuto();CFG.auto={def:a.def,rules:(a.rules||[]).concat([{id:uid(),kw:k,reply:r}])};save();toast('Added','ok');render()},
+autoSave(id){const a=getAuto(),k=$('#ak_'+id).value.trim(),r=$('#ar_'+id).value.trim();if(!k||!r)return toast('Add keywords and a reply','err');CFG.auto={def:a.def,rules:(a.rules||[]).map(x=>x.id===id?{id,kw:k,reply:r}:x)};save();toast('Saved','ok')},
+autoDel(id){const a=getAuto();CFG.auto={def:a.def,rules:(a.rules||[]).filter(x=>x.id!==id)};save();render()},
+logoPick(){const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=async()=>{const f=i.files[0];if(!f)return;CFG.logo=await sq(f,256,'png');save();toast('Logo changed','ok');render()};i.click()},
+logoReset(){delete CFG.logo;save();toast('Default logo restored','ok');render()},
+avatar(){const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=async()=>{const f=i.files[0];if(!f)return;S.user.avatar=await sq(f,160,'jpeg');save();toast('Photo updated','ok');render()};i.click()},
+demo(){const mk=(n,e,ec,b,d)=>({id:uid(),ec,name:n,email:e,phone:'018'+Math.floor(1e7+Math.random()*9e7),pass:enc('123456'),balance:b,dep:d,earned:0,created:now(),tasksDone:0,fp:uid()});
+  if(uEc('EC-1001'))return toast('Demo data already loaded','err');
+  const buyer=mk('Rafi Buyer','buyer@test.com','EC-1001',0,50),w1=mk('Sakil','sakil@test.com','EC-4887',0,0),w2=mk('Lavly Akter','lavly@test.com','EC-8080',0,0);
+  w2.refBy=w1.id;DB.users.push(buyer,w1,w2);
+  const t={id:uid(),owner:buyer.id,title:'Subscribe to my YouTube channel',desc:'Subscribe and send a screenshot.',cat:'YouTube',sub:'Subscribe',link:'https://youtube.com',price:.015,max:10,shots:1,timer:0,total:.2,paid:.2,fromDep:.2,fromEarn:0,fee:.05,created:now(),expires:now()+5*DAY,boost:0,status:'active'};DB.tasks.push(t);
+  const p1={id:uid(),taskId:t.id,workerId:w1.id,slot:0,shots:[fakeShot('Proof pending')],status:'pending',t:now()-3600000},p2={id:uid(),taskId:t.id,workerId:w2.id,slot:1,shots:[fakeShot('Proof rejected')],status:'rejected',buyerAct:'Rejected by Rafi Buyer EC-1001 (not clear)',t:now()-7200000,decidedAt:now()-3600000};DB.proofs.push(p1,p2);
+  DB.claims.push({id:t.id+'_0',taskId:t.id,uid:w1.id,slot:0,t:now()});
+  DB.deposits.push({id:uid(),uid:w2.id,name:'Lavly Akter',ec:'EC-8080',amt:100,method:'Nagad',key:'nagad',cur:'local',bonus:0,trx:'Hahahahhaa',shot:fakeShot('Deposit shot'),status:'pending',t:now()-1800000});
+  save();toast('Demo loaded. Users: buyer@test.com / sakil@test.com / lavly@test.com, password 123456','ok');render()}
+};
+
+/* ============ INIT ============ */
+window.addEventListener('online',banner);window.addEventListener('offline',banner);banner();
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window._ip=e});
+['click','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,()=>lastAct=now(),{passive:true}));
+setInterval(()=>{if(S.sess){const idle=now()-lastAct;if(idle>30*60000){toast('Logged out due to inactivity','err');A.logout()}else if(idle>28*60000)toast('Session expires in 2 minutes')}expireTasks()},60000);
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register('sw.js').catch(()=>{});
+document.addEventListener('focusout',()=>{if(PENDING)setTimeout(softRender,400)});
+setInterval(()=>{if(LOADED){expireTasks();if(S.admin)cleanup()}},60000);
+setInterval(()=>{if(!LOADED)return;if(S.admin){closeIdleChats();if(S.tab==='inbox'&&!S.chatUid)softRender()}else if(S.user&&S.view==='chat'){const c=chatOf(S.user);if(c&&c.status==='open'&&(c.lastUserMsg||0)>0){c.lastSeen=now();c.uSeen=now();save()}closeIdleChats(S.user.id)}},20000);
+applyTheme();connect();
+if(S.sess)S.view='home';
+if(URLREF&&!S.sess){S.view='auth';S.p='reg'}
+render();
+</script>
+</body>
+</html>
